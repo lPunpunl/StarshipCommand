@@ -1,0 +1,206 @@
+.agenda_container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 4;
+}
+
+.agenda_app_container{
+    opacity: 1;
+    /*transition: opacity 0.3s ease;*/
+    pointer-events: auto;
+    position: relative;
+    width: 90%;
+    background-color: #221726;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0);
+    box-shadow: 0 0 10px #ffffff00;
+    margin: 0 10px 0 10px;
+}
+
+.agenda_app_container_hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+ 
+@media (min-width: 600px) {
+    .agenda_app_container {
+      min-width: 600px; 
+      max-width: 600px; /* Opcional: para limitar su crecimiento en pantallas muy grandes */
+      padding: 20px;
+    }
+}
+
+@media (max-height: 520px) and (orientation : landscape) {
+    .agenda_container {
+        align-items: flex-start;
+        height: 100vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* para suavizar en iOS */
+    }
+    .agenda_app_container {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+.agenda_app_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #E6E6E6;
+}
+  
+.agenda_changemonth_button {
+    background-color: #a87f05;
+    color: #ffbf00;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+  
+.agenda_changemonth_button:hover {
+    background-color: #a87f0580;
+}
+  
+.agenda_weekdays {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+  
+.agenda_weekday {
+    width: 14%;
+    text-align: center;
+    font-weight: bold;
+    color: #E6E6E6;
+}
+ 
+
+
+
+
+
+
+
+
+.agenda_calendar_grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+  
+.agenda_calendar_day, .agenda_empty_day {
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+    transition: all 0.2s ease;
+}
+  
+.agenda_calendar_day {
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    margin: 2px;
+    color: #E6E6E6;
+}
+  
+.agenda_calendar_day:hover {
+    background-color: #3b284280;
+}
+  
+.agenda_has_activities {
+    background-color: #3b2842; /* Fondo azul claro */
+    position: relative;
+}
+
+.agenda_activity_dot {
+    position: absolute;
+    bottom: 85%;
+    left: 100%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #D9A300; /* Punto amarillo */
+}
+
+.agenda_current_day {
+    background-color: #a87f05;
+    position: relative;
+}
+
+.agenda_current_day:hover {
+    background-color: #a87f0580;
+    position: relative;
+}
+
+
+
+
+
+
+
+
+
+
+.agenda_close_button_div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.agenda_close_button {
+    width: 40px;
+    height: 40px;
+    background-color: #A01A20;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+  
+.agenda_close_button:hover {
+    background-color: #A01A2080;
+}
+  
+.agenda_close_button::before,
+.agenda_close_button::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    background-color: #E34C52;
+}
+
+.agenda_close_button::before {
+    transform: rotate(45deg);
+}
+  
+.agenda_close_button::after {
+    transform: rotate(-45deg);
+}

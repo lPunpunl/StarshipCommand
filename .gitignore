@@ -1,0 +1,23 @@
+# General
+node_modules/
+.env
+dist/
+build/
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Frontend específico (React)
+Client/node_modules/
+Client/.env
+Client/build/
+
+# Backend específico (Express)
+Server/node_modules/
+Server/.env

@@ -1,0 +1,47 @@
+.profile_layout_container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 3; /* Para que esté por encima de otros elementos */
+  }
+  
+  .pl_button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: rgba(0,0,0,0);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    box-shadow: 0 0 0 0 rgb(255, 255, 255);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .pl_button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .pl_dropdown_menu {
+    display: grid;
+    position: absolute;
+    right: 0;
+    margin-top: 5px;
+    background-color: rgb(255, 255, 255, 0);
+    color:#ffffff; 
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    width: 130px;
+    overflow: hidden;
+  }
+  
+  .pl_menu_item {
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  
+  .pl_menu_item:hover {
+    background-color: #f5f5f5;
+  }
