@@ -23,7 +23,7 @@ export const Buttons_for_apps = ({ children }) => {
   const [positions, setPositions] = useState([]);
   
 
-  const buttonSize = { width: 30, height: 20 }; // en vw y vh
+  const buttonSize = { width: 30, height: 25 }; // en vw y vh
 
   const generatePositions = () => {
     const generated = [forbiddenZone];

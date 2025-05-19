@@ -17,10 +17,10 @@ export const EditUser = ({ onClose }) => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUpdateInfo(prev => ({
-          ...prev,
-          [name]: value
+            ...prev,
+            [name]: value
         }));
-      };
+        };
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
@@ -60,25 +60,26 @@ export const EditUser = ({ onClose }) => {
         <div className={styles.eu_container}>
             <div className={styles.eu_form_container}>
                 <div className={styles.eu_close_button_div}>
-                    <h3>Editar perfil</h3>
+                    <h1> </h1>
                     <button className={styles.eu_close_button} onClick={handleClose}></button>
                 </div>
+                <h1 className={styles.eu_header_title}>Editar perfil</h1>
                 <form className={styles.eu_form} onSubmit={handleSubmit}>
 
                     <div className={styles.eu_form_group}>
-                        <label>Nuevo nombre de usuario: </label>
-                        <div></div>
+                        <label className={styles.eu_input_label}>Nuevo nombre de usuario: </label>
                         <input
                         name='newUser'
                         type='text'
                         value={updateInfo.newUser}
                         onChange={handleInputChange}
                         placeholder={user}
+                        className={styles.eu_input}
                         />
                     </div>
 
                     <div className={styles.eu_form_group}>
-                        <label>Nueva contraseña: </label>
+                        <label className={styles.eu_input_label}>Nueva contraseña: </label>
                         <div></div>
                         <input
                         name='newPassword'
@@ -86,11 +87,12 @@ export const EditUser = ({ onClose }) => {
                         value={updateInfo.newPassword}
                         onChange={handleInputChange}
                         placeholder='*****'
+                        className={styles.eu_input}
                         />
                     </div>
 
                     <div className={styles.eu_form_group}>
-                        <label>Contraseña actual: </label>
+                        <label className={styles.eu_input_label}>Contraseña actual: </label>
                         <div></div>
                         <input
                         name='password'
@@ -99,6 +101,7 @@ export const EditUser = ({ onClose }) => {
                         onChange={handleInputChange}
                         required
                         placeholder='*****'
+                        className={styles.eu_input}
                         />
                     </div>
 

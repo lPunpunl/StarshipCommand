@@ -96,6 +96,27 @@
     border-radius: 8px;
     padding: 0px 10px 0px 10px;
   }
+
+    .aa_create_button_div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .aa_create_button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #a87f05;
+    color: #E6E6E6;
+    transition: all 0.2s ease;
+  }
+
+  .aa_create_button:hover {
+    background-color: #a87f0580;
+  }
   
   /* Lista de actividades sin estilos por defecto */
   .aa_activities_list {
@@ -109,6 +130,9 @@
     display: flex;           /* Distribución horizontal */
     align-items: center;     /* Centrado vertical */
     padding: 10px 8px;
+  }
+
+  .aa_activity_item_white_row {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }
   
@@ -132,28 +156,6 @@
     color: #E6E6E6;
   }
 
-
-  .aa_create_button_div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-
-  .aa_create_button {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #a87f05;
-    color: #E6E6E6;
-    transition: all 0.2s ease;
-  }
-
-  .aa_create_button:hover {
-    background-color: #a87f0580;
-  }
-  
   .aa_activity_actions {/* Ancho fijo para los botones */
     display: flex;
     gap: 10px;               /* Espacio entre botones */
@@ -190,7 +192,6 @@
   .aa_delete_button:hover {
     background-color: #A01A2080;
   }
-
   
 
 
@@ -198,63 +199,64 @@
 
 
 
+  .aa_activity_confirm_delete_div {
+    display: flex;           /* Distribución horizontal */
+    align-items: center;     /* Centrado vertical */
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #1d1420;
+  }
+
+    .aa_activity_confirm_delete_text {  
+    /*flex: 1;/* Toma el espacio restante */
+    padding: 0 1px;
+    /*white-space: nowrap;*/    /* Evita saltos de línea */
+    overflow: hidden;       /* Oculta texto que sobresale */
+    text-overflow: ellipsis; /* Muestra "..." si el texto es largo */
+    color: #E6E6E6;
+  }
+
+    .aa_confirm_delete_actions {/* Ancho fijo para los botones */
+    display: flex;
+    gap: 10px;               /* Espacio entre botones */
+    margin-left: 10px;
+    border-radius: 6px;
+  }
+  
+  .aa_cancel_delete_button, .aa_confirm_delete_button {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .aa_cancel_delete_button {
+    padding: 5px 8px 4px 8px;
+    background-color: #29657B00; 
+    color: #a87f05;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .aa_cancel_delete_button:hover {
+    background-color: #29657B80;
+  }
+  
+  .aa_confirm_delete_button {
+    padding: 5px 8px 4px 8px;
+    background-color: #A01A2000;
+    color: #a87f05;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .aa_confirm_delete_button:hover {
+    background-color: #A01A2080;
+  }
 
 
 
-.aa_modal_overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3); /* Fondo oscuro semi-transparente */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Asegura que esté por encima de todo */
-  backdrop-filter: blur(2px); /* Efecto de desenfoque opcional */
-}
 
-.aa_modal {
-  background: white;
-  padding: 24px;
-  border-radius: 12px;
-  width: 10%;
-  max-width: 400px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Borde sutil */
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
 
-.aa_modal_delete_button, .aa_modal_cancel_button {
-  display: flex;
-  justify-content: center;
-  padding: 6px 12px;
-  border-radius: 4px;
-  border: none;
-  gap: 5px;
-  cursor: pointer;
-}
-
-.aa_modal_delete_button {
-  background-color: #4CAF50; /* Verde */
-  color: white;
-}
-
-.aa_modal_cancel_button {
-  background-color: #f44336; /* Rojo */
-  color: white;
-}
-
-.aa_modal_delete_button:hover {
-  background-color: #45a049;
-}
-
-.aa_modal_cancel_button:hover {
-  background-color: #d32f2f;
-}
 
 
 

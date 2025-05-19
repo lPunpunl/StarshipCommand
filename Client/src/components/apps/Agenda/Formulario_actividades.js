@@ -114,7 +114,7 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
         <div className={styles.formulario_actividades_container}>
             <div className={styles.formulario_actividades_app_container}>
                 <div className={styles.fa_close_button_div}>
-                    <h1></h1>
+                    <h1> </h1>
                     <button className={styles.fa_close_button} onClick={onClose}></button>
                 </div>
                 <h2 className={styles.fa_selected_date}>{formattedDate}</h2>

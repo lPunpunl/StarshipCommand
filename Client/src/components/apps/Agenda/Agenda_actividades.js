@@ -99,25 +99,25 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
             } else{
                 setActivitiesOn(updatedActivities);
             }
- 
+
         } catch (error) {
             console.error("Error:", error.response?.data || error.message);
             alert("failure at eliminating");
         } finally {
             setShowConfirmModal(false);
         }
-      };
+        };
 
     return(
         <div className={styles.agenda_activities_container}>
             <div className={`${styles.agenda_activities_app_container} ${isInvisible ? styles.agenda_activities_app_container_hidden : ''}`}>
                 <div className={styles.aa_close_button_div}>
-                    <h1></h1>
+                    <h1> </h1>
                     <button className={styles.aa_close_button} onClick={handleClose}></button>
                 </div>
                 <h2 className={styles.aa_selected_date}>{formattedDate}</h2>
                 <div className={styles.aa_create_button_div}>
-                    <h1></h1>
+                    <h1> </h1>
                     <button className={styles.aa_create_button} onClick={handleCreateClick}>Crear</button>
                 </div>
                 <div className={styles.aa_activities_container}>
@@ -126,42 +126,56 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
                         .slice()
                         .sort((a,b) => a.time.localeCompare(b.time))
                         .map(activity => (
-                            <li key={activity._id} className={styles.aa_activity_item}>
-                                {/* Columna 1: Hora */}
-                                <span className={styles.aa_activity_time}>{activity.time}</span>
 
-                                <span className={styles.aa_activity_separation}>|</span>
-                                
-                                {/* Columna 2: Descripción (con texto ajustable) */}
-                                <span className={styles.aa_activity_description}>{activity.description}</span>
-                                
-                                {/* Columna 3: Botones de acción */}
-                                <div className={styles.aa_activity_actions}>
-                                    <button 
-                                        className={styles.aa_edit_button}
-                                        onClick={() => handleEditClick(activity._id)}  // Función para editar
-                                    >
-                                        <Pencil size={16}/>
-                                    </button>
-                                    <button
-                                        className={styles.aa_delete_button}
-                                        onClick={() => handleDelete(activity._id)} // Función para eliminar
-                                    >
-                                        <Trash2 size={16}/>
-                                    </button>
-                                </div>
-                            </li>
+                            <div key={activity._id} className={styles.aa_activity_item_white_row}>
+                                <li key={activity._id} className={styles.aa_activity_item}>
+                                    {/* Columna 1: Hora */}
+                                    <span className={styles.aa_activity_time}>{activity.time}</span>
+
+                                    <span className={styles.aa_activity_separation}>|</span>
+                                    
+                                    {/* Columna 2: Descripción (con texto ajustable) */}
+                                    <span className={styles.aa_activity_description}>{activity.description}</span>
+                                    
+                                    {/* Columna 3: Botones de acción */}
+                                    <div className={styles.aa_activity_actions}>
+                                        <button 
+                                            className={styles.aa_edit_button}
+                                            onClick={() => handleEditClick(activity._id)}  // Función para editar
+                                        >
+                                            <Pencil size={16}/>
+                                        </button>
+                                        <button
+                                            className={styles.aa_delete_button}
+                                            onClick={() => handleDelete(activity._id)} // Función para eliminar
+                                        >
+                                            <Trash2 size={16}/>
+                                        </button>
+                                    </div>
+                                </li>
+
+                                {activityToDelete === activity._id && showConfirmModal &&(
+                                    <li className={styles.aa_activity_confirm_delete_div}>
+                                        <span className={styles.aa_activity_confirm_delete_text}>¿Eliminar actividad?</span>
+                                        <div className={styles.aa_confirm_delete_actions}>
+                                            <button className={styles.aa_cancel_delete_button} onClick={() => {setShowConfirmModal(false); setActivityToDelete(null)}}>Cancelar</button>
+                                            <button className={styles.aa_confirm_delete_button} onClick={confirmDelete}>Eliminar</button>
+                                        </div>
+                                    </li>
+                                )}
+                            </div>
+
                         ))}
                     </ul>
                 </div>
-                {showConfirmModal && (
+                {/**{showConfirmModal && (
                 <div className={styles.aa_modal_overlay}>
                     <div className={styles.aa_modal}>
                     <button className={styles.aa_modal_delete_button} onClick={confirmDelete}>Delete</button>
                     <button className={styles.aa_modal_cancel_button} onClick={() => setShowConfirmModal(false)}>Cancel</button>
                     </div>
-                </div>
-                )}
+                </div>  
+                )}*/}
             </div>
             {renderComponentCreate()}
             {renderComponentEdit()}

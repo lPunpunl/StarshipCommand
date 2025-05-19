@@ -11,7 +11,7 @@
     gap: 8px;
     padding: 8px 16px;
     background-color: rgba(0,0,0,0);
-    color: #ffffff;
+    color: #E6E6E6;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 5px;
     box-shadow: 0 0 0 0 rgb(255, 255, 255);
@@ -21,7 +21,8 @@
   }
   
   .pl_button:hover {
-    background-color: #f0f0f0;
+    background-color: #e6e6e6;
+    color: #424242;
   }
   
   .pl_dropdown_menu {
@@ -30,7 +31,7 @@
     right: 0;
     margin-top: 5px;
     background-color: rgb(255, 255, 255, 0);
-    color:#ffffff; 
+    color:#E6E6E6; 
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 5px;
     width: 130px;
@@ -40,8 +41,10 @@
   .pl_menu_item {
     padding: 10px 15px;
     cursor: pointer;
+    transition: all 0.3s ease;
   }
   
   .pl_menu_item:hover {
-    background-color: #f5f5f5;
+    background-color: #e6e6e6;
+    color: #424242;
   }
