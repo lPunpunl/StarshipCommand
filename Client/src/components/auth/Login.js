@@ -1,5 +1,5 @@
-import './Login.css'
-import React, { useState } from 'react';
+import styles from './Login.module.css'
+import { useState } from 'react';
 import { createUser } from '../../api/user'
 import { login } from '../../api/auth'
 import { useNavigate } from 'react-router-dom';
@@ -53,52 +53,56 @@ export const Login = () => {
     };
 
     return (
-    <div className='Login-container'>
-      <div className='Login'>
-        <h1>{activeTab === 'login' ? 'Iniciar Sesión' : 'Registrarse'}</h1>
+    <div className={styles.login_container}>
+      <div className={styles.login_form_container}>
+        <h1 className={styles.login_header_title}>{activeTab === 'login' ? 'Iniciar Sesión' : 'Registrarse'}</h1>
         
         {/* Pestañas */}
-        <div className="tabs">
+        <div className={styles.login_tabs_row}>
           <button
-            className={`tab ${activeTab === 'login' ? 'active' : ''}`}
+            className={`${styles.login_select_tab} ${activeTab === 'login' ? styles.login_selected_tab_active : ''}`}
             onClick={() => handleTabChange('login')}
           >
-            Login
+            Inicio de sesión
           </button>
           <button
-            className={`tab ${activeTab === 'register' ? 'active' : ''}`}
+            className={`${styles.login_select_tab} ${activeTab === 'register' ? styles.login_selected_tab_active : ''}`}
             onClick={() => handleTabChange('register')}
           >
-            Register
+            Registrarse
           </button>
         </div>
 
         {/* Formulario */}
         <form onSubmit={handleSubmit}>
           
-          <div className="form-group">
-            <label>User</label>
+          <div className={styles.login_form_group}>
+            <label className={styles.login_form_group_label}>Nombre de usuario</label>
             <input
+              className={styles.login_form_group_input}
               type="text"
               name="user"
               value={formData.user}
               onChange={handleInputChange}
               required
+              placeholder='Usuario...'
             />
           </div>
           
-          <div className="form-group">
-            <label>Password</label>
+          <div className={styles.login_form_group}>
+            <label className={styles.login_form_group_label}>Contraseña</label>
             <input
+              className={styles.login_form_group_input}
               type="password"
               name="password"
               value={formData.password}
               onChange={handleInputChange}
               required
+              placeholder='*****'
             />
           </div>
 
-          <button type="submit" className="submit-btn">
+          <button type="submit" className={styles.login_submit_button}>
             {activeTab === 'login' ? 'Iniciar Sesión' : 'Registrarse'}
           </button>
         </form>
