@@ -37,9 +37,9 @@ async function createUser(req, res) {
         });
       }
     });
-  }
+}
 
-  async function editUser(req, res) {
+async function editUser(req, res) {
     const { user, password, newUser, newPassword } = req.body;
 
     // Validaciones básicas
