@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { deleteActivity, getActivitiesByDay } from "../../../api/agenda";
 import { Formulario_actividades } from './Formulario_actividades';
 import { Trash2, Pencil } from 'lucide-react';
+import Toast from '../../utils/Toast';
 
 
 export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdateFetch }) => {
@@ -13,6 +14,21 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
     const [activeComponentEdit, setActiveComponentEdit] = useState(false);
     const [activityToEdit, setACtivityToEdit] = useState(null);
     const [isInvisible, setIsInvisible]= useState(false);
+
+    const [toast, setToast] = useState(null);
+    const showToastPromise = (message, type, position) => {
+        return new Promise((resolve) => {
+        setToast({ message, type, position });
+        setTimeout(() => {
+        setToast(null);
+            resolve(); // Se resuelve la promesa después de ocultar el toast
+            }, 3000);
+            });
+        };
+    const showToast = (message, type, position) =>{
+        setToast({message, type, position});
+        setTimeout(() => setToast(null), 3000);
+    };
 
     const date = new Date(selectedDate.year, selectedDate.month - 1, selectedDate.day); // mes va de 0 a 11
     const formattedDate = date.toLocaleDateString('es-ES', {
@@ -44,13 +60,17 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
     const handleCreateClose = async () =>{
         setActiveComponentCreate(false)
         setIsInvisible(false);
-        const updatedActivities = await getActivitiesByDay( selectedDate.day, selectedDate.month, selectedDate.year, token, user_id);
-
+        try {
+            const updatedActivities = await getActivitiesByDay( selectedDate.day, selectedDate.month, selectedDate.year, token, user_id);
             if (updatedActivities === null){
                 setActivitiesOn([])
             } else{
                 setActivitiesOn(updatedActivities);
             }
+        } catch (error) {
+            showToast(error.messae, "error", "top");
+        }
+        
     }
 
     const renderComponentCreate = () =>{
@@ -69,13 +89,18 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
     const handleEditClose = async ()=>{
         setActiveComponentEdit(false);
         setIsInvisible(false);
-        const updatedActivities = await getActivitiesByDay( selectedDate.day, selectedDate.month, selectedDate.year, token, user_id);
 
+        try {
+            const updatedActivities = await getActivitiesByDay( selectedDate.day, selectedDate.month, selectedDate.year, token, user_id);
             if (updatedActivities === null){
                 setActivitiesOn([])
             } else{
                 setActivitiesOn(updatedActivities);
             }
+        } catch (error) {
+            showToast(error.message, "error", "top")
+        }
+        
     }
 
     const renderComponentEdit = () =>{
@@ -101,8 +126,7 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
             }
 
         } catch (error) {
-            console.error("Error:", error.response?.data || error.message);
-            alert("failure at eliminating");
+            showToast(error.message, "error", "top")
         } finally {
             setShowConfirmModal(false);
         }
@@ -168,15 +192,8 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
                         ))}
                     </ul>
                 </div>
-                {/**{showConfirmModal && (
-                <div className={styles.aa_modal_overlay}>
-                    <div className={styles.aa_modal}>
-                    <button className={styles.aa_modal_delete_button} onClick={confirmDelete}>Delete</button>
-                    <button className={styles.aa_modal_cancel_button} onClick={() => setShowConfirmModal(false)}>Cancel</button>
-                    </div>
-                </div>  
-                )}*/}
             </div>
+            {toast && <Toast {...toast} />}
             {renderComponentCreate()}
             {renderComponentEdit()}
         </div>

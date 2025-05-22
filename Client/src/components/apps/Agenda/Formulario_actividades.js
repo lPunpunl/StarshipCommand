@@ -2,12 +2,28 @@ import styles from './Formulario_actividades.module.css'
 import React, { useState, useEffect } from 'react';
 import { updateActivity , createActivity } from '../../../api/agenda'
 import Select from 'react-select';
-import Toast from '../utils/Toast'
+import Toast from '../../utils/Toast';
+
 
 export const Formulario_actividades = ({ onClose, selectedDate, mode="create", activityData=null  }) => {
     const [hour, setHour] = useState('08');
     const [minutes, setMinutes] = useState('30');
     const [description, setDescription] = useState('');
+
+    const [toast, setToast] = useState(null);
+    const showToastPromise = (message, type, position) => {
+      return new Promise((resolve) => {
+        setToast({ message, type, position });
+        setTimeout(() => {
+          setToast(null);
+          resolve(); // Se resuelve la promesa después de ocultar el toast
+        }, 3000);
+      });
+    };
+    const showToast = (message, type, position) =>{
+      setToast({message, type, position});
+      setTimeout(() => setToast(null), 3000);
+    };
 
     const token = localStorage.getItem('jwtToken');
     const user_id = localStorage.getItem('_id');
@@ -31,18 +47,31 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+            // Validar longitud
+        if (description.length > 100) {
+            showToast("La descripción no puede tener más de 100 caracteres.", "warning", "top");
+            return;
+        }
+
+        // Validar caracteres permitidos
+        const validDescriptionRegex = /^[a-zA-Z0-9\s.,;:!?¿¡()'"-]+$/;
+        if (!validDescriptionRegex.test(description)) {
+            showToast("La descripción contiene caracteres no permitidos.", "warning", "top");
+            return;
+        }
+
         const time = `${hour}:${minutes}`
         if(mode === "create"){
             try {
                 await createActivity( time, selectedDate.day, selectedDate.month, selectedDate.year, description, token, user_id)
             } catch (error) {
-                console.log(error)
+              showToast(error.message, "error", "top")
             }
         } else {
             try {
                 await updateActivity(activityData._id, time, description, token)
             } catch (error) {
-                console.log(error)
+              showToast(error.message, "error", "top")
             }
         }
         onClose(); // Cierra el modal después de enviar
@@ -155,6 +184,7 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
                     </button>
                 </form>
             </div>
+            {toast && <Toast {...toast} />}
         </div>
     );
 }

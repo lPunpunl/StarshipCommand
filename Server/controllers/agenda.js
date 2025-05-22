@@ -2,8 +2,6 @@ const Agenda = require("../models/agenda");
 
 async function createActivity(req, res) {
 
-  try {
-    
   
     const {
       user_id,
@@ -14,7 +12,7 @@ async function createActivity(req, res) {
       description
     } = req.body;
   
-    if ( !user_id || !time || !day || !month || !year || !description) return res.status(400).send({ msg: "all fields are required" });
+    if ( !user_id || !time || !day || !month || !year || !description) return res.status(400).send({ message: "Todos los campos son necesarios" });
   
     const agenda = new Agenda({
       user_id,
@@ -25,17 +23,19 @@ async function createActivity(req, res) {
       description
     });
   
+    try {
+    
     await agenda.save((error, userStorage) => {
       if (error) {
-        res.status(500).send({ msg: "Error creating the activity" });
+        res.status(500).send({ error:"ErrorSaving", message: "Error de la base de datos creando el usuario." });
         console.log(error);
       } else {
-        res.status(200).send({ msg: "activity created succesfully ", userStorage} );
+        res.status(200).send({ message: "Actividad guardada correctamente. ", userStorage} );
       }
     });
   } catch (error) {
-    console.error("Error creating the activity:", error);
-    res.status(500).send({ msg: "Error creating the activity" });
+    console.error("Error in creating user: ", error);
+    res.status(500).send({  error:"InternalServerError", message: "Error interno del servidor, intenta más tarde." });
   }
   
   }
@@ -47,13 +47,13 @@ async function createActivity(req, res) {
       const deleteActivity = await Agenda.findOneAndDelete({ _id });
   
       if (!deleteActivity) {
-        res.status(500).send({ msg: "failure deleting the activity" });
+        res.status(500).send({ message: "Error al eliminar la actividad, fallo del servidor." });
       } else {
-        res.status(200).send({ msg: "activity deleted" });
+        res.status(200).send({ message: "Actividad eliminada correctamente." });
       }
     } catch (error) {
-      console.log(error);
-      throw error;
+      console.error("Error deleting the activity:", error);
+      res.status(500).send({  error:"InternalServerError", message: "Error interno del servidor, intenta más tarde." });
     }
   }
 
@@ -79,19 +79,19 @@ async function createActivity(req, res) {
       );
   
       if (!activityUpdate) {
-        res.status(500).send({ msg: "error updating the activity" });
+        res.status(500).send({ message: "Error al actualizar la actividad, fallo en el servidor." });
       } else {
-        res.status(200).send({ msg: "the activity was updated succesfully"});
+        res.status(200).send({ message: "La actividad se actualizó correctamente."});
       }
     } catch (error) {
-      console.log(error);
-      throw error;
+      console.error("Error in login:", error);
+      res.status(500).send({  error:"InternalServerError", message: "Error interno del servidor, intenta más tarde." });
     }
   }
 
   async function getActivityByDay(req, res) {
     const { user_id, day, month, year } = req.query;
-    if(!user_id || !day || !month || !year) return res.status(400).send({msg: "all fields are required"});
+    if(!user_id || !day || !month || !year) return res.status(400).send({ message: "Todos los campos son requeridos." });
 
     try {
 
@@ -111,13 +111,14 @@ async function createActivity(req, res) {
     res.status(200).send(activities);
   
     } catch (error) {
-      return res.status(500).send({ msg: "error getting the activities" });
+      console.error("Error in login:", error);
+      res.status(500).send({  error:"InternalServerError", message: "Error interno del servidor, intenta más tarde." });
     }
   }
 
   async function getActivityByMonth(req, res) {
     const {user_id, month, year} = req.query;
-    if(!user_id || !month || !year) return res.status(400).send({msg: "all fields are required"});
+    if(!user_id || !month || !year) return res.status(400).send({ message: "Todos los campos son requeridos." });
 
     try {
 
@@ -136,7 +137,8 @@ async function createActivity(req, res) {
     res.status(200).send(activities);
   
     } catch (error) {
-      return res.status(500).send({ msg: "Error al obtener las actividades" });
+      console.error("Error in login:", error);
+      res.status(500).send({  error:"InternalServerError", message: "Error interno del servidor, intenta más tarde." });
     }
   }
 

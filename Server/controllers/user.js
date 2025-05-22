@@ -26,7 +26,7 @@ async function createUser(req, res) {
     }); 
 
     try {
-        createUser.save((error, userStorage) => {
+        await createUser.save((error, userStorage) => {
         if (error) {
             console.log(error);
             res.status(400).send({ error:"ErrorSaving", message: "Error de la base de datos creando el usuario." });
@@ -108,48 +108,46 @@ async function editUser(req, res) {
 }
 
 async function getUsers(req, res) {
-  try {
+    try {
       // Buscar todos los usuarios excluyendo campos sensibles
-      const users = await User.find({})
+    const users = await User.find({})
           .select('-password -__v') // Excluir password y versión
           .lean(); // Convertir a objeto JavaScript simple (opcional)
 
-      if (!users || users.length === 0) {
-          return res.status(404).send({ msg: "No users found" });
-      }
+    if (!users || users.length === 0) {
+        return res.status(404).send({ messages: "Ningun usuario encontrado." });
+    }
 
-      res.status(200).send({
-          msg: "Users retrieved successfully",
-          count: users.length,
-          users: users
-      });
+    res.status(200).send({
+        message: "Usuarios obtenidos correctamente.",
+        count: users.length,
+        users: users
+    });
 
-  } catch (error) {
-      console.error("Error fetching users:", error);
-      res.status(500).send({ 
-          msg: "Internal server error"
-      });
-  }
-}
+    } catch (error) {
+        console.error("Error gettin users:", error);
+        res.status(500).send({  error:"InternalServerError", message: "Error interno del servidor, intenta más tarde." });
+    }
+    }
 
 async function deleteUser(req, res) {
   const { user, password } = req.body;
 
   // Validaciones básicas
-  if (!user) return res.status(400).send({ msg: "Username is required" });
-  if (!password) return res.status(400).send({ msg: "Password is required for verification" });
+  if (!user) return res.status(400).send({ message: "El usuario  es requerido." });
+  if (!password) return res.status(400).send({ message: "La contraseña es requerida." });
 
   try {
       // 1. Buscar el usuario
       const existingUser = await User.findOne({ user: user.toLowerCase() });
       if (!existingUser) {
-          return res.status(404).send({ msg: "User not found" });
+          return res.status(404).send({ message: "Usuario no encontrado." });
       }
 
       // 2. Verificar la contraseña
       const isPasswordValid = bcrypt.compareSync(password, existingUser.password);
       if (!isPasswordValid) {
-          return res.status(401).send({ msg: "Invalid password" });
+          return res.status(401).send({ message: "Error en la autenticación." });
       }
 
       // 3. Eliminar el usuario
@@ -157,11 +155,11 @@ async function deleteUser(req, res) {
           .select('-password -__v'); // Excluir datos sensibles
 
       if (!deletedUser) {
-          return res.status(400).send({ msg: "Error deleting user" });
+          return res.status(500).send({ message: "Error eliminando el usuario, falla de la base de datos" });
       }
 
       res.status(200).send({
-          msg: "User deleted successfully",
+          message: "Usuario eliminado correctamente.",
           deletedUser: {
               username: deletedUser.user,
               createdAt: deletedUser.createdAt
@@ -169,13 +167,10 @@ async function deleteUser(req, res) {
           }
       });
 
-  } catch (error) {
-      console.error("Error deleting user:", error);
-      res.status(500).send({ 
-          msg: "Internal server error",
-          error: process.env.NODE_ENV === 'development' ? error.message : undefined
-      });
-  }
+    } catch (error) {
+        console.error("Error in user update:", error);
+        res.status(500).send({  error:"InternalServerError", message: "Error interno del servidor, intenta más tarde." });
+    }
 }
 
 module.exports = {

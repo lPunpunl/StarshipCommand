@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Agenda_actividades } from './Agenda_actividades';
 import { getActivitiesByMonth } from "../../../api/agenda";
 import { Formulario_actividades } from './Formulario_actividades';
+import Toast from '../../utils/Toast';
 
 export const Agenda = ({ onClose }) =>{
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -11,6 +12,21 @@ export const Agenda = ({ onClose }) =>{
     const [loading, setLoading] = useState([]);
     const [updateFetch, setUpdateFetch] = useState();
     const [isInvisible, setIsInvisible]= useState(false);
+
+    const [toast, setToast] = useState(null);
+        const showToastPromise = (message, type, position) => {
+          return new Promise((resolve) => {
+            setToast({ message, type, position });
+            setTimeout(() => {
+              setToast(null);
+              resolve(); // Se resuelve la promesa después de ocultar el toast
+            }, 3000);
+          });
+        };
+        const showToast = (message, type, position) =>{
+          setToast({message, type, position});
+          setTimeout(() => setToast(null), 3000);
+        };
 
     const userFromLS = localStorage.getItem('user');
     const token = localStorage.getItem('jwtToken');
@@ -33,7 +49,7 @@ export const Agenda = ({ onClose }) =>{
         const activities = await getActivitiesByMonth( month, year, token, user_id);
         setMonthActivities(activities);
       } catch (error) {
-        console.error("error al obtener las actividades", error)
+        showToast(error.message, "error", "top")
       } finally {
         setLoading(false);
       }
@@ -127,9 +143,8 @@ export const Agenda = ({ onClose }) =>{
 
     const renderComponent = () => {
         if (selectedDate != null){
-
-          
-          const activitiesForSelectedDay = monthActivities.filter(activity =>{
+          try {
+            const activitiesForSelectedDay = monthActivities.filter(activity =>{
             return(
               activity.day === selectedDate.day.toString() &&
               activity.month === selectedDate.month.toString() &&
@@ -138,6 +153,9 @@ export const Agenda = ({ onClose }) =>{
           });
 
           return <Agenda_actividades activities={activitiesForSelectedDay} selectedDate={selectedDate} onClose={handleClose} onUpdateFetch={updateFetchFunction}/>
+          } catch (error) {
+            showToast(error.message, "error", "top")
+          }
         } else {
             return null;
         }
@@ -167,6 +185,7 @@ export const Agenda = ({ onClose }) =>{
                 </div>
             </div>
             {renderComponent()}
+            {toast && <Toast {...toast} />}
         </div>
     );
 };

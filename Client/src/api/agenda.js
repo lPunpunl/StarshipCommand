@@ -18,7 +18,11 @@ export const getActivitiesByMonth = async (month, year, token, user_id) => {
         });
         return response.data;
     } catch (error) {
-        throw error;
+        if (error.response?.status === 401){
+            window.location.reload()
+        }
+        const errorMessage = error.response?.data?.message || error.message || "Error desconocido";
+        throw new Error(errorMessage);
     }
 };
 
@@ -39,15 +43,17 @@ export const getActivitiesByDay = async ( day, month, year, token, user_id) => {
 
         if (response.data.length === 0) {
             return null;
-          }
+        }
 
         
 
         return response.data;
     } catch (error) {
-        console.log("no activities found");
-        console.log(error);
-        return null;
+        if (error.response?.status === 401){
+            window.location.reload()
+        }
+        const errorMessage = error.response?.data?.message || error.message || "Error desconocido";
+        throw new Error(errorMessage);
     }
 };
 
@@ -59,10 +65,13 @@ export const deleteActivity = async (id, token) => {
             }}
         );
 
-        console.log("Activity deleted")
+        return(true);
     } catch (error) {
-        console.error("Error:", error.response?.data || error.message);
-        alert("failure at eliminating");
+        if (error.response?.status === 401){
+            window.location.reload()
+        }
+        const errorMessage = error.response?.data?.message || error.message || "Error desconocido";
+        throw new Error(errorMessage);
     }
 }
 
@@ -77,9 +86,11 @@ export const updateActivity = async (_id, time, description, token) =>{
         );
         return(response);
     } catch (error) {
-        console.log(error);
-        console.error("Error:", error.response?.data || error.message);
-        alert("failure at updating");
+        if (error.response?.status === 401){
+            window.location.reload()
+        }
+        const errorMessage = error.response?.data?.message || error.message || "Error desconocido";
+        throw new Error(errorMessage);
     }
 }
 
@@ -95,8 +106,10 @@ export const createActivity = async (time, day, month, year, description, token,
 
         return(response)
     } catch (error) {
-        console.log(error);
-        console.error("Error:", error.response?.data || error.message);
-        alert("failure at creating");
+        if (error.response?.status === 401){
+            window.location.reload()
+        }
+        const errorMessage = error.response?.data?.message || error.message || "Error desconocido";
+        throw new Error(errorMessage);
     }
 }

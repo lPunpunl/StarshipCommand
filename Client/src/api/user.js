@@ -12,6 +12,9 @@ export const createUser = async (formData) => {
         
         return(response.data.message);
     } catch (error) {
+        if (error.response?.status === 401){
+            window.location.reload()
+        }
         const errorMessage = error.response?.data?.message || error.message || "Error desconocido";
         throw new Error(errorMessage);
     }
