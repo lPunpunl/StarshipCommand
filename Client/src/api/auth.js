@@ -15,8 +15,9 @@ export const login = async (formData) => {
             token: response.data.token,
             userData: response.data.existingUser
         };
+
     } catch (error) {
-        console.error("Error:", error.response?.data || error.message);
-        alert("failure at loging");
+        const errorMessage = error.response?.data?.message || error.message || "Error desconocido";
+        throw new Error(errorMessage);
     }
 };

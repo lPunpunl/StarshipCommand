@@ -1,14 +1,14 @@
 import styles from './Formulario_actividades.module.css'
 import React, { useState, useEffect } from 'react';
 import { updateActivity , createActivity } from '../../../api/agenda'
-import Select from 'react-select'
+import Select from 'react-select';
+import Toast from '../utils/Toast'
 
 export const Formulario_actividades = ({ onClose, selectedDate, mode="create", activityData=null  }) => {
     const [hour, setHour] = useState('08');
-    const [minutes, setMinutes] = useState('00');
+    const [minutes, setMinutes] = useState('30');
     const [description, setDescription] = useState('');
 
-    const userFromLS = localStorage.getItem('user');
     const token = localStorage.getItem('jwtToken');
     const user_id = localStorage.getItem('_id');
 
@@ -32,7 +32,6 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
     const handleSubmit = async (e) => {
         e.preventDefault();
         const time = `${hour}:${minutes}`
-
         if(mode === "create"){
             try {
                 await createActivity( time, selectedDate.day, selectedDate.month, selectedDate.year, description, token, user_id)
@@ -155,9 +154,6 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
                         {mode === "create" ? 'Guardar' : 'Guardar'}
                     </button>
                 </form>
-
-
-
             </div>
         </div>
     );

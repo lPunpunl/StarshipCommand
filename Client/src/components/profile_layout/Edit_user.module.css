@@ -110,6 +110,12 @@
     outline: none;
   }
 
+  .eu_input_error {
+    color: #F0403A;
+    margin-top: 10px;
+    padding: 10px 20px 1px 10px;
+  }
+
 
 
 

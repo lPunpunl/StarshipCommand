@@ -184,7 +184,7 @@
   
   .aa_delete_button {
     padding: 5px 8px 4px 8px;
-    background-color: #A01A2000; /* Rojo */
+    background-color: #A01A2000; 
     color: #a87f05;
     border: 1px solid rgba(255, 255, 255, 0.2);
   }

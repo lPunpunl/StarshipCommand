@@ -124,6 +124,12 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
+  .login_input_error {
+    color: #F0403A;
+    margin-top: 10px;
+    padding: 10px 20px 1px 10px;
+  }
+
   .login_form_group_input::placeholder {
     color: #e6e6e6af;
   }

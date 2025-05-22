@@ -3,70 +3,74 @@ const bcrypt = require("bcrypt");
 
 async function createUser(req, res) {
     const {
-      user,
-      password,
+        user,
+        password,
     } = req.body;
-  
-    if (!user) res.status(400).send({ msg: "user is required" });
-    if (!password) res.status(400).send({ msg: "password is required" });
+
+    if (!user) res.status(400).send({ error:"RequiredField", message: "El usuario es requerido." });
+    if (!password) res.status(400).send({ error: "RequiredField", message: "La contraseña es requerida." });
 
     // 1. Verificar si el usuario ya existe
     const existingUser = await User.findOne({ user: user.toLowerCase() }); // Búsqueda case-insensitive
     if (existingUser) {
-        return res.status(409).send({ msg: "Username already exists" }); // 409 = Conflict
+        return res.status(409).send({ error:"ExistingUsername", message: "Nombre de usuario ya en uso." }); // 409 = Conflict
     }
-  
+
     //hasheo de password
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(password, salt);
-  
+
     const createUser = new User({
-      user: user.toLowerCase(),
-      password: hashPassword,
+        user: user.toLowerCase(),
+        password: hashPassword,
     }); 
-  
-    await createUser.save((error, userStorage) => {
-      if (error) {
-        res.status(400).send({ msg: "error creating the user" });
-        console.log(error);
-        return;
-      } else {
-        userStorage.password = undefined;
-        res.status(200).send({
-          msg: "user registered", userStorage
-        });
-      }
+
+    try {
+        createUser.save((error, userStorage) => {
+        if (error) {
+            console.log(error);
+            res.status(400).send({ error:"ErrorSaving", message: "Error de la base de datos creando el usuario." });
+        } else {
+            userStorage.password = undefined;
+            res.status(200).send({
+            message: "Usuario Registrado.", userStorage
+            });
+    }
     });
+    } catch (error) {
+        console.error("Error in creating user: ", error);
+        res.status(500).send({  error:"InternalServerError", message: "Error interno del servidor, intenta más tarde." });
+    }
 }
 
 async function editUser(req, res) {
     const { user, password, newUser, newPassword } = req.body;
 
     // Validaciones básicas
-    if (!user) return res.status(400).send({ msg: "Current username is required" });
-    if (!password) return res.status(400).send({ msg: "Current password is required for verification" });
+    if (!user) return res.status(400).send({ error: "RequiredField", message: "El usuario actual es requerido." });
+    if (!password) return res.status(400).send({ error: "RequiredField", message: "La contraseña actual es requerida." });
     if (!newUser && !newPassword) {
-        return res.status(400).send({ msg: "At least one field to update is required (newUser or newPassword)" });
+        return res.status(400).send({ error: "RequiredField", message: "Se requiere de al menos un nuevo nombre de usuario o una nueva contraseña." });
     }
 
     try {
         // 1. Buscar y autenticar el usuario existente
         const existingUser = await User.findOne({ user: user.toLowerCase() });
         if (!existingUser) {
-            return res.status(404).send({ msg: "User not found" });
+            return res.status(404).send({ error:"UserNotFound", message: "Usuario no encontrado." });
         }
 
         // 2. Verificar la contraseña actual
         const isPasswordValid = bcrypt.compareSync(password, existingUser.password);
         if (!isPasswordValid) {
-            return res.status(401).send({ msg: "Invalid current password" });
+            return res.status(401).send({ error:"AuthenticationFailed", message: "Error de autenticación." });
         }
 
         // 3. Verificar si el nuevo username ya existe (solo si se está cambiando)
         if (newUser && newUser.toLowerCase() !== existingUser.user) {
             const userExists = await User.findOne({ user: newUser.toLowerCase() });
             if (userExists) {
-                return res.status(409).send({ msg: "New username is already taken" });
+                return res.status(409).send({ error:"ExistingUsername", message: "Nombre de usuario ya en uso." });
             }
         }
 
@@ -89,21 +93,17 @@ async function editUser(req, res) {
         ).select('-password -__v'); // Excluir campos sensibles
 
         if (!updatedUser) {
-            return res.status(400).send({ msg: "Error updating user" });
+            return res.status(500).send({ error:"DatabaseError", message: "Error actualizando el usuario." });
         }
 
-        res.status(200).send({
-            msg: "User updated successfully",
-            user: {
-                username: updatedUser.user
-            }
+        return res.status(200).send({
+            success: true,
+            message: "Los cambios se guardaron correctamente."
         });
 
     } catch (error) {
         console.error("Error in user update:", error);
-        res.status(500).send({ 
-            msg: "Internal server error",
-        });
+        res.status(500).send({  error:"InternalServerError", message: "Error interno del servidor, intenta más tarde." });
     }
 }
 

@@ -10,11 +10,10 @@ export const createUser = async (formData) => {
                 'Content-Type':'application/json'
             }});
         
-        return(response);
+        return(response.data.message);
     } catch (error) {
-        console.log(error);
-        console.error("Error:", error.response?.data || error.message);
-        alert("failure at creating");
+        const errorMessage = error.response?.data?.message || error.message || "Error desconocido";
+        throw new Error(errorMessage);
     }
 };
 
@@ -33,10 +32,9 @@ export const editUser = async (updateInfo, token) =>{
                 'Authorization':`Bearer ${token}`
             }}
         );
-        return(response);
+        return(response.data.message);
     } catch (error) {
-        console.log(error);
-        console.error("Error:", error.response?.data || error.message);
-        alert("failure at updating the user");
+        const errorMessage = error.response?.data?.message || error.message || "Error desconocido";
+        throw new Error(errorMessage);
     }
 }
