@@ -4,6 +4,7 @@ import { deleteActivity, getActivitiesByDay } from "../../../api/agenda";
 import { Formulario_actividades } from './Formulario_actividades';
 import { Trash2, Pencil } from 'lucide-react';
 import Toast from '../../utils/Toast';
+import { motion, AnimatePresence } from "framer-motion";
 
 
 export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdateFetch }) => {
@@ -14,6 +15,8 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
     const [activeComponentEdit, setActiveComponentEdit] = useState(false);
     const [activityToEdit, setACtivityToEdit] = useState(null);
     const [isInvisible, setIsInvisible]= useState(false);
+
+    const [isVisible, setIsVisible] = useState(true);
 
     const [toast, setToast] = useState(null);
     const showToast = (message, type, position) =>{
@@ -32,14 +35,19 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
     const user_id = localStorage.getItem('_id');
 
     const handleClose = () =>{
-        const now = new Date();
-        const horas = now.getHours().toString().padStart(2, '0');     // 2 dígitos (ej: 09)
-        const minutos = now.getMinutes().toString().padStart(2, '0'); // 2 dígitos (ej: 05)
-        const segundos = now.getSeconds().toString().padStart(2, '0'); // 2 dígitos (ej: 03)
-        const fullHour = horas + minutos + segundos;
         
-        onUpdateFetch(fullHour);
-        if (onClose) onClose();
+        setIsVisible(false);
+        setTimeout(() => {
+            const now = new Date();
+            const horas = now.getHours().toString().padStart(2, '0');     // 2 dígitos (ej: 09)
+            const minutos = now.getMinutes().toString().padStart(2, '0'); // 2 dígitos (ej: 05)
+            const segundos = now.getSeconds().toString().padStart(2, '0'); // 2 dígitos (ej: 03)
+            const fullHour = horas + minutos + segundos;
+            
+            onUpdateFetch(fullHour);
+            if (onClose) onClose(); // Aquí haces lo que hacías en tu `onClose` original
+        }, 200); // Tiempo suficiente para que el exit se vea (igual a transition.duration)
+        
     }
 
     const handleCreateClick = () =>{
@@ -123,8 +131,18 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
         };
 
     return(
-        <div className={styles.agenda_activities_container}>
-            <div className={`${styles.agenda_activities_app_container} ${isInvisible ? styles.agenda_activities_app_container_hidden : ''}`}>
+        <div>
+            <AnimatePresence mode="wait">
+            {isVisible && (
+                <motion.div
+                    key="agenda_actividades"
+                    initial={{ opacity: 0, scale: 1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1 }}
+                    transition={{ duration: 0.2 }}
+                    className={styles.agenda_activities_container}
+                >
+            <div className={styles.agenda_activities_app_container}>
                 <div className={styles.aa_close_button_div}>
                     <h2> </h2>
                     <button className={styles.aa_close_button} onClick={handleClose}></button>
@@ -134,15 +152,7 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
                     <h1> </h1>
                     <button className={styles.aa_create_button} onClick={handleCreateClick}>Crear</button>
                 </div>
-
-
-                
-
-
-
                 <div className={styles.aa_activities_container}>
-
-
                 {activitiesOn.length === 0 ? (
                     <div className={styles.aa_no_activities_message}>
                         <h3>
@@ -181,7 +191,6 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
                                         </button>
                                     </div>
                                 </li>
-
                                 {activityToDelete === activity._id && showConfirmModal &&(
                                     <li className={styles.aa_activity_confirm_delete_div}>
                                         <p className={styles.aa_activity_confirm_delete_text}>¿Eliminar actividad?</p>
@@ -192,13 +201,15 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
                                     </li>
                                 )}
                             </div>
-
                         ))}
                     </ul>
                     )}
                 </div>
             </div>
-            {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
+        </motion.div>
+        )}
+</AnimatePresence>
+        {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
             {renderComponentCreate()}
             {renderComponentEdit()}
         </div>

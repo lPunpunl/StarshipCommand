@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { updateActivity , createActivity } from '../../../api/agenda'
 import Select from 'react-select';
 import Toast from '../../utils/Toast';
+import { motion, AnimatePresence } from "framer-motion";
 
 
 export const Formulario_actividades = ({ onClose, selectedDate, mode="create", activityData=null  }) => {
     const [hour, setHour] = useState('08');
     const [minutes, setMinutes] = useState('30');
     const [description, setDescription] = useState('');
+    const [isVisible, setIsVisible] = useState(true);
 
     const [toast, setToast] = useState(null);
     const showToast = (message, type, position) =>{
@@ -140,19 +142,35 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
           color: '#E6E6E6',
         }),
       };
+
+      const handleClose = () => {
+        setIsVisible(false);
+        setTimeout(() => {
+          onClose(); // Aquí haces lo que hacías en tu `onClose` original
+        }, 200); // Tiempo suficiente para que el exit se vea (igual a transition.duration)
+      }
     
     return (
-        <div className={styles.formulario_actividades_container}>
+      <div>
+        <AnimatePresence mode="wait">
+      {isVisible && (
+        <motion.div
+          key="agenda_actividades"
+          initial={{ opacity: 0, scale: 1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1 }}
+          transition={{ duration: 0.2 }}
+          className={styles.formulario_actividades_container}
+        >
             <div className={styles.formulario_actividades_app_container}>
                 <div className={styles.fa_close_button_div}>
                     <h1> </h1>
-                    <button className={styles.fa_close_button} onClick={onClose}></button>
+                    <button className={styles.fa_close_button} onClick={handleClose}></button>
                 </div>
                 <h1 className={styles.fa_selected_date}>{formattedDate}</h1>
                 <h2 className={styles.fa_activity_option}>{mode === "create" ? 'Crear actividad' : 'Editar actividad'}</h2>
                 <form className={styles.fa_form_container} onSubmit={handleSubmit}>
                     <div className={styles.fa_form_group}>
-
                         <div className={styles.fa_time_selectors}>
                             <Select 
                                 options={hourOptions}
@@ -168,9 +186,7 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
                                 styles={customStyles}
                             />
                         </div>
-
                     </div>
-
                     <div className={styles.fa_form_group}>
                         <textarea
                         rows="4"
@@ -182,13 +198,15 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
                         onKeyDown={handleKeyDown}
                         />
                     </div>
-
                     <button type="submit" className={styles.fa_submit_button}>
                         {mode === "create" ? 'Guardar' : 'Guardar'}
                     </button>
                 </form>
             </div>
-            {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
+        </motion.div>
+        )}
+        </AnimatePresence>
+        {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
         </div>
     );
 }

@@ -11,12 +11,18 @@ export const Login = () => {
   const [activeTab, setActiveTab] = useState('login'); // 'login' o 'register'
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
+  const [isToastVisible, setIsToastVisible] = useState(false);
 
   //useState y funcion para llamar y mostrar una notificacion toast
   const [toast, setToast] = useState(null);
   const showToast = (message, type, position) =>{
-    setToast({message, type, position});
-  };
+        setToast({message, type, position});
+        setIsToastVisible(true);
+        setTimeout(() => {
+            setToast(null);
+            setIsToastVisible(false);
+        }, 3100);
+    }
   
   const validationSchema = Yup.object({
     user: Yup.string()
@@ -132,7 +138,7 @@ export const Login = () => {
           )}
         </div>
 
-        <button type="submit" className={styles.login_submit_button} disabled={formik.isSubmitting}>
+        <button type="submit" className={styles.login_submit_button} disabled={formik.isSubmitting || isToastVisible}>
           {activeTab === 'login' ? 'Iniciar Sesión' : 'Registrarse'}
         </button>
       </form>

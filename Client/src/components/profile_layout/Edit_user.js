@@ -5,12 +5,14 @@ import { editUser } from '../../api/user'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import Toast from '../utils/Toast'
+import { motion, AnimatePresence } from "framer-motion";
 
 export const EditUser = ({ onClose }) => {
     const navigate = useNavigate();
     const storedUser = localStorage.getItem('user');
     const token = localStorage.getItem('jwtToken');
     const [isToastVisible, setIsToastVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
 
     //useState y funcion para llamar y mostrar una notificacion toast
     const [toast, setToast] = useState(null);
@@ -86,12 +88,25 @@ const validationSchema = Yup.object({
         },
     });
 
-    const handleClose = () =>{
-        if (onClose) onClose();
+    const handleClose = () => {
+        setIsVisible(false);
+        setTimeout(() => {
+        onClose(); // Aquí haces lo que hacías en tu `onClose` original
+      }, 200); // Tiempo suficiente para que el exit se vea (igual a transition.duration)
     }
 
     return (
-        <div className={styles.eu_container}>
+        <div>
+            <AnimatePresence mode="wait">
+        {isVisible && (
+        <motion.div 
+            key="agenda"
+            initial={{ opacity: 1, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+            className={styles.eu_container}
+        >
             <div className={styles.eu_form_container}>
                 <div className={styles.eu_close_button_div}>
                     <h1> </h1>
@@ -150,6 +165,9 @@ const validationSchema = Yup.object({
                     <button type="submit" className={styles.eu_submit_button} disabled={formik.isSubmitting || isToastVisible}>Guardar cambios</button>
                 </form>
             </div>
+        </motion.div>
+        )}
+        </AnimatePresence>
             {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
         </div>
     );

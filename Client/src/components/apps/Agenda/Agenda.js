@@ -2,8 +2,8 @@ import styles from './Agenda.module.css';
 import React, { useState, useEffect } from 'react';
 import { Agenda_actividades } from './Agenda_actividades';
 import { getActivitiesByMonth } from "../../../api/agenda";
-import { Formulario_actividades } from './Formulario_actividades';
 import Toast from '../../utils/Toast';
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Agenda = ({ onClose }) =>{
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -12,6 +12,9 @@ export const Agenda = ({ onClose }) =>{
     const [loading, setLoading] = useState([]);
     const [updateFetch, setUpdateFetch] = useState();
     const [isInvisible, setIsInvisible]= useState(false);
+
+    const [isVisible, setIsVisible] = useState(true);
+    const [direction, setDirection] = useState("start");
 
     const [toast, setToast] = useState(null);
         const showToast = (message, type, position) =>{
@@ -53,13 +56,20 @@ export const Agenda = ({ onClose }) =>{
       fetchActivitiesByMonth()
     }, [currentDate, updateFetch]);
   
+  
     // Funciones para cambiar de mes
     const goToPreviousMonth = () => {
-      setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+      setDirection("prev");
+      requestAnimationFrame(() => {
+        setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
+      });
     };
   
     const goToNextMonth = () => {
-      setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+      setDirection("next");
+      requestAnimationFrame(() => {
+        setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
+      });
     };
   
     // Función para seleccionar un día
@@ -126,10 +136,17 @@ export const Agenda = ({ onClose }) =>{
       return calendarDays;
     };
 
-    const handleClose = () => {
+    const handleComponentClose = () => {
         setSelectedDate(null); // Oculta el componente
         setIsInvisible(false);
     };
+
+    const handleClose = () => {
+      setIsVisible(false);
+      setTimeout(() => {
+        onClose(); // Aquí haces lo que hacías en tu `onClose` original
+      }, 200); // Tiempo suficiente para que el exit se vea (igual a transition.duration)
+    }
 
     const renderComponent = () => {
         if (selectedDate != null){
@@ -142,7 +159,7 @@ export const Agenda = ({ onClose }) =>{
             )
           });
 
-          return <Agenda_actividades activities={activitiesForSelectedDay} selectedDate={selectedDate} onClose={handleClose} onUpdateFetch={updateFetchFunction}/>
+          return <Agenda_actividades activities={activitiesForSelectedDay} selectedDate={selectedDate} onClose={handleComponentClose} onUpdateFetch={updateFetchFunction}/>
           } catch (error) {
             showToast(error.message, "error", "top")
           }
@@ -152,28 +169,62 @@ export const Agenda = ({ onClose }) =>{
     }
     
     return(
-        <div className={styles.agenda_container}>
-            <div className={` ${styles.agenda_app_container} ${isInvisible ? styles.agenda_app_container_hidden : ''}`}>
-              <div className={styles.agenda_close_button_div}>
-                <h2> </h2>
-                <button className={styles.agenda_close_button} onClick={onClose}></button>
-              </div>
-                <div className={styles.agenda_app_header}>
-                    <button className={styles.agenda_changemonth_button} onClick={goToPreviousMonth}>&lt;</button>
-                    <h1 className={styles.agenda_date_text}>{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h1>
-                    <button className={styles.agenda_changemonth_button} onClick={goToNextMonth}>&gt;</button>
-                </div>
-                <div className={styles.agenda_weekdays}>
-                    {['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'].map((day) => (
-                    <p key={day} className={styles.agenda_weekday}>
-                        {isMobile ? day[0].toUpperCase() : day}
-                    </p>
-                    ))}
-                </div>
-                <div className={styles.agenda_calendar_grid}>
-                    {renderCalendar()}
-                </div>
-            </div>
+        <div>
+
+          <AnimatePresence mode="wait">
+
+            {isVisible && (
+              <motion.div
+                key="agenda"
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+                className={styles.agenda_container}
+              >
+                <div className={styles.agenda_app_container}>
+                  <div className={styles.agenda_close_button_div}>
+                    <h2> </h2>
+                    <button className={styles.agenda_close_button} onClick={handleClose}></button>
+                  </div>
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={currentDate.toString()} // esto hace que cambie al cambiar el mes
+                        initial={{ opacity: 0, x: direction === "next" ? 10 : direction === "prev" ? -10 : 0 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: direction === "next" ? -10 : 10 }}
+                        transition={{ duration: 0.2 }}
+                      >
+
+                    <div className={styles.agenda_app_header}>
+                        <button className={styles.agenda_changemonth_button} onClick={goToPreviousMonth}>&lt;</button>
+                        <h1 className={styles.agenda_date_text}>{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h1>
+                        <button className={styles.agenda_changemonth_button} onClick={goToNextMonth }>&gt;</button>
+                    </div>
+                    <div className={styles.agenda_weekdays}>
+                        {['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'].map((day) => (
+                        <p key={day} className={styles.agenda_weekday}>
+                            {isMobile ? day[0].toUpperCase() : day}
+                        </p>
+                        ))}
+                    </div>
+                    <div className={styles.agenda_calendar_grid}>
+                        {renderCalendar()}
+                    </div>
+
+
+                      </motion.div>
+                    </AnimatePresence>
+
+
+
+
+
+
+                  </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
             {renderComponent()}
             {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
         </div>
