@@ -203,10 +203,11 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
                     </button>
                 </form>
             </div>
+            {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
         </motion.div>
         )}
         </AnimatePresence>
-        {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
+        
         </div>
     );
 }

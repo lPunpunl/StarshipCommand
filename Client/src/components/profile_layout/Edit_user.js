@@ -81,7 +81,7 @@ const validationSchema = Yup.object({
                 window.location.reload();
                 }
         } catch (error) {
-            showToast(error.message, "error", "top");
+            showToast(error.message, "warning", "top");
             setSubmitting(false);
 
         }
@@ -165,10 +165,11 @@ const validationSchema = Yup.object({
                     <button type="submit" className={styles.eu_submit_button} disabled={formik.isSubmitting || isToastVisible}>Guardar cambios</button>
                 </form>
             </div>
+            {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
         </motion.div>
         )}
         </AnimatePresence>
-            {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
+            
         </div>
     );
 }

@@ -206,10 +206,11 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
                     )}
                 </div>
             </div>
+            {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
         </motion.div>
         )}
 </AnimatePresence>
-        {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
+        
             {renderComponentCreate()}
             {renderComponentEdit()}
         </div>

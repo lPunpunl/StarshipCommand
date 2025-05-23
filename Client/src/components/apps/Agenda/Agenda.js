@@ -222,11 +222,13 @@ export const Agenda = ({ onClose }) =>{
 
 
                   </div>
+                  {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
               </motion.div>
             )}
+            
           </AnimatePresence>
             {renderComponent()}
-            {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
+            
         </div>
     );
 };
