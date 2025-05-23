@@ -39,6 +39,9 @@
   }
   
   .pl_menu_item {
+    border: 1px solid rgba(255, 255, 255, 0);
+    background-color: rgba(0,0,0,0);
+    color: #E6E6E6;
     padding: 10px 15px;
     cursor: pointer;
     transition: all 0.3s ease;

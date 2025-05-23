@@ -14,18 +14,8 @@ export const Agenda = ({ onClose }) =>{
     const [isInvisible, setIsInvisible]= useState(false);
 
     const [toast, setToast] = useState(null);
-        const showToastPromise = (message, type, position) => {
-          return new Promise((resolve) => {
-            setToast({ message, type, position });
-            setTimeout(() => {
-              setToast(null);
-              resolve(); // Se resuelve la promesa después de ocultar el toast
-            }, 3000);
-          });
-        };
         const showToast = (message, type, position) =>{
           setToast({message, type, position});
-          setTimeout(() => setToast(null), 3000);
         };
 
     const userFromLS = localStorage.getItem('user');
@@ -113,14 +103,14 @@ export const Agenda = ({ onClose }) =>{
         const isToday = day === todayDay && month === todayMonth && year === todayYear;
 
         calendarDays.push(
-          <div
+          <span
             key={day}
             className={`${styles.agenda_calendar_day} ${isToday ? styles.agenda_current_day : hasActivities ? styles.agenda_has_activities : ''}`}
             onClick={() => handleDayClick(day)}
           >
             {day}
             {hasActivities && <span className={styles.agenda_activity_dot}></span>}
-          </div>
+          </span>
         );
       }
 
@@ -165,19 +155,19 @@ export const Agenda = ({ onClose }) =>{
         <div className={styles.agenda_container}>
             <div className={` ${styles.agenda_app_container} ${isInvisible ? styles.agenda_app_container_hidden : ''}`}>
               <div className={styles.agenda_close_button_div}>
-                <h2></h2>
+                <h2> </h2>
                 <button className={styles.agenda_close_button} onClick={onClose}></button>
               </div>
                 <div className={styles.agenda_app_header}>
                     <button className={styles.agenda_changemonth_button} onClick={goToPreviousMonth}>&lt;</button>
-                    <h2>{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
+                    <h1 className={styles.agenda_date_text}>{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h1>
                     <button className={styles.agenda_changemonth_button} onClick={goToNextMonth}>&gt;</button>
                 </div>
                 <div className={styles.agenda_weekdays}>
                     {['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'].map((day) => (
-                    <div key={day} className={styles.agenda_weekday}>
+                    <p key={day} className={styles.agenda_weekday}>
                         {isMobile ? day[0].toUpperCase() : day}
-                    </div>
+                    </p>
                     ))}
                 </div>
                 <div className={styles.agenda_calendar_grid}>
@@ -185,7 +175,7 @@ export const Agenda = ({ onClose }) =>{
                 </div>
             </div>
             {renderComponent()}
-            {toast && <Toast {...toast} />}
+            {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
         </div>
     );
 };

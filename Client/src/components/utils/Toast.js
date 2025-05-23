@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Toast.module.css'
 import { Info, TriangleAlert, CircleX, CircleCheck  } from 'lucide-react'
 
-export default function Toast({ message, type = 'info', position = 'topRight' }) {
+export default function Toast({ message, type = 'info', position = 'topRight', onClose }) {
+    const [isExiting, setIsExiting] = useState(false)
 
     const renderIcon = () => {
         switch (type) {
@@ -18,11 +19,20 @@ export default function Toast({ message, type = 'info', position = 'topRight' })
         }
     };
 
+    useEffect(() => {
+    const timer = setTimeout(() => {
+        setIsExiting(true)
+        setTimeout(onClose, 500) // espera que termine la animación
+    }, 3000)
+
+    return () => clearTimeout(timer)
+    }, [onClose])
+
 
 
     return (
-        <div className={`${styles.toast} ${styles[position]}`}>
-            <div className={`${styles[type]}`}>
+        <div className={`${isExiting ? styles.slideOutTop : styles.slideInTop} ${styles.toast} ${styles[type]} ${styles[position]}`}>
+            <div className={styles.message}>
                 <span className={styles.icon}>{renderIcon()}</span>
                 <span>{message}</span>
             </div>

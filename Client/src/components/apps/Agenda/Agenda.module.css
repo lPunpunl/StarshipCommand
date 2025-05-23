@@ -18,7 +18,7 @@
     position: relative;
     width: 90%;
     background-color: #221726;
-    padding: 10px;
+    padding: 10px 10px 15px 10px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0);
     box-shadow: 0 0 10px #ffffff00;
@@ -67,6 +67,10 @@
     margin-bottom: 20px;
     color: #E6E6E6;
 }
+
+.agenda_date_text {
+    align-self: center;
+}
   
 .agenda_changemonth_button {
     background-color: #a87f05;
@@ -91,7 +95,6 @@
 .agenda_weekday {
     width: 14%;
     text-align: center;
-    font-weight: bold;
     color: #E6E6E6;
 }
  
@@ -107,11 +110,12 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
+    margin-bottom: 2px;
 }
   
 .agenda_calendar_day, .agenda_empty_day {
     text-align: center;
-    padding: 10px;
+    padding: 11px 10px;
     box-sizing: border-box;
     position: relative;
     transition: all 0.2s ease;
@@ -204,3 +208,5 @@
 .agenda_close_button::after {
     transform: rotate(-45deg);
 }
+
+

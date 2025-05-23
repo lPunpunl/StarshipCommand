@@ -11,18 +11,8 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
     const [description, setDescription] = useState('');
 
     const [toast, setToast] = useState(null);
-    const showToastPromise = (message, type, position) => {
-      return new Promise((resolve) => {
-        setToast({ message, type, position });
-        setTimeout(() => {
-          setToast(null);
-          resolve(); // Se resuelve la promesa después de ocultar el toast
-        }, 3000);
-      });
-    };
     const showToast = (message, type, position) =>{
       setToast({message, type, position});
-      setTimeout(() => setToast(null), 3000);
     };
 
     const token = localStorage.getItem('jwtToken');
@@ -48,13 +38,18 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
     const handleSubmit = async (e) => {
         e.preventDefault();
             // Validar longitud
-        if (description.length > 100) {
-            showToast("La descripción no puede tener más de 100 caracteres.", "warning", "top");
+        if (description.length > 250) {
+            showToast("La descripción no puede tener más de 250 caracteres.", "warning", "top");
+            return;
+        }
+
+        if (description.length < 1) {
+            showToast("La descripción no estar vacía.", "warning", "top");
             return;
         }
 
         // Validar caracteres permitidos
-        const validDescriptionRegex = /^[a-zA-Z0-9\s.,;:!?¿¡()'"-]+$/;
+        const validDescriptionRegex = /^[a-zA-Z0-9\s.,;:!?¿¡()ñáéíóú'"-]+$/;
         if (!validDescriptionRegex.test(description)) {
             showToast("La descripción contiene caracteres no permitidos.", "warning", "top");
             return;
@@ -77,6 +72,12 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
         onClose(); // Cierra el modal después de enviar
       };
     
+      const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleSubmit(e); // aquí sí le mandas el evento
+        }
+      };
 
       const hourOptions = Array.from({ length: 24 }, (_, i) => ({
         value: String(i).padStart(2, '0'),
@@ -95,6 +96,7 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
           color: '#E6E6E6',
           border: '1px solid rgba(255, 255, 255, 0.3)',
           borderRadius: '6px',
+          fontSize: 'var(--font-size-sm)',
           boxShadow: 'none',
           ':hover': {
             borderColor: 'rgba(255, 255, 255, 0.3)',
@@ -108,6 +110,7 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
         menu: (base) => ({
           ...base,
           backgroundColor: '#221726',
+          fontSize: 'var(--font-size-sm)',
           border: '1px solid rgba(255, 255, 255, 0.3)',
         }),
         option: (base, state) => ({
@@ -145,9 +148,9 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
                     <h1> </h1>
                     <button className={styles.fa_close_button} onClick={onClose}></button>
                 </div>
-                <h2 className={styles.fa_selected_date}>{formattedDate}</h2>
-                <h3 className={styles.fa_activity_option}>{mode === "create" ? 'Crear actividad' : 'Editar actividad'}</h3>
-                <form onSubmit={handleSubmit}>
+                <h1 className={styles.fa_selected_date}>{formattedDate}</h1>
+                <h2 className={styles.fa_activity_option}>{mode === "create" ? 'Crear actividad' : 'Editar actividad'}</h2>
+                <form className={styles.fa_form_container} onSubmit={handleSubmit}>
                     <div className={styles.fa_form_group}>
 
                         <div className={styles.fa_time_selectors}>
@@ -169,13 +172,14 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
                     </div>
 
                     <div className={styles.fa_form_group}>
-                        <input
+                        <textarea
+                        rows="4"
                         type='text'
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        required
                         className={styles.fa_description_input}
                         placeholder="Descripción..."
+                        onKeyDown={handleKeyDown}
                         />
                     </div>
 
@@ -184,7 +188,7 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
                     </button>
                 </form>
             </div>
-            {toast && <Toast {...toast} />}
+            {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
         </div>
     );
 }

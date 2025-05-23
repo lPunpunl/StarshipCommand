@@ -28,6 +28,5 @@
   .bfa_button_text {
     position: absolute;
     color: white;
-    font-size: 1rem;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
   }

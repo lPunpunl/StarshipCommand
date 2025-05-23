@@ -63,8 +63,6 @@ async function createActivity(req, res) {
       time,
       description
     } = req.body;
-
-    console.log(req.body);
   
     try {
       const activityUpdate = await Agenda.findOneAndUpdate(

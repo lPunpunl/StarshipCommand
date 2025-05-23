@@ -5,6 +5,7 @@
     width: 100%;
     height: 100%;
     display: flex;
+    /*flex-direction: column;*/
     justify-content: center;
     align-items: center;
     /*background-color: rgba(0, 0, 0, 0.1);*/
@@ -15,6 +16,8 @@
     position: relative;
     width: 90%;
     background-color: #221726;
+    min-height: 416px;
+    max-height: 421px;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0);
@@ -26,6 +29,7 @@
   .formulario_actividades_app_container {
     min-width: 600px; 
     max-width: 600px; /* Opcional: para limitar su crecimiento en pantallas muy grandes */
+    min-height: 421px;
     padding: 20px;
   }
 }
@@ -56,9 +60,11 @@
     padding-bottom: 0px;
     text-align: center;
     color: #E6E6E6;
+    margin-bottom: 40px;
 }
 
 .fa_activity_option {
+  margin-bottom: 30px;
   color: #E6E6E6;
 }
 
@@ -66,7 +72,10 @@
 
 
 
-  
+  .fa_form_container {
+    /*align-self: self-end;*/
+  }  
+
   .fa_form_group {
     margin-bottom: 15px;
   }
@@ -89,11 +98,12 @@
   .fa_description_input {
     box-sizing: border-box;
     width: 100%;
-    padding: 15px 0 15px 15px;
+    padding: 15px 15px 15px 15px;
     background-color: #3b2842;
     color: #E6E6E6;
     border-radius: 4px;
     border: 0px solid rgba(255, 255, 255, 0);
+    resize: none;
   }
 
   .fa_description_input::placeholder {
@@ -111,7 +121,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 15px;
     transition: all 0.2s ease;
   }
   

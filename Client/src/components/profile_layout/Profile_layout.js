@@ -18,6 +18,7 @@ export const ProfileLayout = () => {
     }
 
     const handleEditClick = () => {
+        setIsMenuOpen(!isMenuOpen)
         setActiveComponentEdit(true);
     }
 
@@ -39,8 +40,8 @@ export const ProfileLayout = () => {
             
             {isMenuOpen && (
                 <div className={styles.pl_dropdown_menu}>
-                    <div className={styles.pl_menu_item} onClick={handleEditClick}>Editar perfil</div>
-                    <div className={styles.pl_menu_item} onClick={handleCerrarSesionClick}>Cerrar sesión</div>
+                    <button className={styles.pl_menu_item} onClick={handleEditClick}>Editar perfil</button>
+                    <button className={styles.pl_menu_item} onClick={handleCerrarSesionClick}>Cerrar sesión</button>
                 </div>
             )}
             {renderComponentEdit()}

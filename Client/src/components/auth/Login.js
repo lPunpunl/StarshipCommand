@@ -14,18 +14,8 @@ export const Login = () => {
 
   //useState y funcion para llamar y mostrar una notificacion toast
   const [toast, setToast] = useState(null);
-  const showToastPromise = (message, type, position) => {
-    return new Promise((resolve) => {
-      setToast({ message, type, position });
-      setTimeout(() => {
-        setToast(null);
-        resolve(); // Se resuelve la promesa después de ocultar el toast
-      }, 3000);
-    });
-  };
   const showToast = (message, type, position) =>{
     setToast({message, type, position});
-    setTimeout(() => setToast(null), 3000);
   };
   
   const validationSchema = Yup.object({
@@ -147,7 +137,7 @@ export const Login = () => {
         </button>
       </form>
     </div>
-    {toast && <Toast {...toast} />}
+    {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
   </div>
   );
 }

@@ -10,22 +10,17 @@ export const EditUser = ({ onClose }) => {
     const navigate = useNavigate();
     const storedUser = localStorage.getItem('user');
     const token = localStorage.getItem('jwtToken');
+    const [isToastVisible, setIsToastVisible] = useState(false);
 
     //useState y funcion para llamar y mostrar una notificacion toast
     const [toast, setToast] = useState(null);
-    const showToastPromise = (message, type, position) => {
-        return new Promise((resolve) => {
-            setToast({ message, type, position });
-            setTimeout(() => {
-                setToast(null);
-                resolve(); // Se resuelve la promesa después de ocultar el toast
-            }, 3000);
-        });
-    };
-
     const showToast = (message, type, position) =>{
         setToast({message, type, position});
-        setTimeout(() => setToast(null), 3000);
+        setIsToastVisible(true);
+        setTimeout(() => {
+            setToast(null);
+            setIsToastVisible(false);
+        }, 3100);
     }
 
 const validationSchema = Yup.object({
@@ -66,26 +61,27 @@ const validationSchema = Yup.object({
         };
         try {
             const response = await editUser(payload, token);
+            setSubmitting(true); // Deshabilita el botón
             // Lógica de post-submit
             if (values.newPassword) {
                 // si cambió password, desloguear
                 localStorage.removeItem('jwtToken');
                 localStorage.removeItem('user');
                 localStorage.removeItem('_id');
-                await showToastPromise(response + " Redirigiendo a inicio de sesión.", "success", "top");
+                showToast(response + " Redirigiendo a inicio de sesión.", "success", "top");
                 //alert("redirigiendo a inicion de sesión")
                 navigate('/login');
             } else {
                 // solo cambió usuario
                 // actualizar localStorage y recargar estado
                 localStorage.setItem('user', values.newUser);
-                await showToastPromise(response + " Recargando página.", "success", "top");
+                showToast(response + " Recargando página.", "success", "top");
                 window.location.reload();
                 }
         } catch (error) {
             showToast(error.message, "error", "top");
-        } finally {
             setSubmitting(false);
+
         }
         },
     });
@@ -151,10 +147,10 @@ const validationSchema = Yup.object({
                                 <div className={styles.eu_input_error}>{formik.errors.password}</div>
                             )}
                     </div>
-                    <button type="submit" className={styles.eu_submit_button} disabled={formik.isSubmitting}>Guardar cambios</button>
+                    <button type="submit" className={styles.eu_submit_button} disabled={formik.isSubmitting || isToastVisible}>Guardar cambios</button>
                 </form>
             </div>
-            {toast && <Toast {...toast} />}
+            {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
         </div>
     );
 }

@@ -79,17 +79,31 @@
 
 
 .aa_selected_date{
-    padding-bottom: 0px;
+    margin-bottom: 10px;
     color: #E6E6E6;
     text-align: center;
 }
 
+.aa_no_activities_message {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%; /* O el alto que tenga el contenedor padre */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #E6E6E680; /* O el color que uses para textos */
+}
 
 
 
 
 /* Contenedor principal con scroll */
 .aa_activities_container {
+    position: relative;
+    min-height: 280px;
     max-height: 280px;  /* Altura máxima antes de mostrar scroll */
     overflow-y: auto;   /* Scroll vertical */
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -138,7 +152,8 @@
   
   /* Columnas */
   .aa_activity_time {
-    flex: 0 0 42px;         /* Ancho fijo para la hora */
+    /*flex: 0 0 42px;         /* Ancho fijo para la hora */
+    padding: 0 5px 0 0;
     color: #E6E6E6;
   }
 
@@ -148,8 +163,9 @@
   }
   
   .aa_activity_description {
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
     flex: 1;                /* Toma el espacio restante */
-    padding: 0 1px;
+    padding: 0 5px;
     /*white-space: nowrap;*/    /* Evita saltos de línea */
     overflow: hidden;       /* Oculta texto que sobresale */
     text-overflow: ellipsis; /* Muestra "..." si el texto es largo */

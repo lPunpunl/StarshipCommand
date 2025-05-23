@@ -16,18 +16,8 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
     const [isInvisible, setIsInvisible]= useState(false);
 
     const [toast, setToast] = useState(null);
-    const showToastPromise = (message, type, position) => {
-        return new Promise((resolve) => {
-        setToast({ message, type, position });
-        setTimeout(() => {
-        setToast(null);
-            resolve(); // Se resuelve la promesa después de ocultar el toast
-            }, 3000);
-            });
-        };
     const showToast = (message, type, position) =>{
         setToast({message, type, position});
-        setTimeout(() => setToast(null), 3000);
     };
 
     const date = new Date(selectedDate.year, selectedDate.month - 1, selectedDate.day); // mes va de 0 a 11
@@ -136,30 +126,44 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
         <div className={styles.agenda_activities_container}>
             <div className={`${styles.agenda_activities_app_container} ${isInvisible ? styles.agenda_activities_app_container_hidden : ''}`}>
                 <div className={styles.aa_close_button_div}>
-                    <h1> </h1>
+                    <h2> </h2>
                     <button className={styles.aa_close_button} onClick={handleClose}></button>
                 </div>
-                <h2 className={styles.aa_selected_date}>{formattedDate}</h2>
+                <h1 className={styles.aa_selected_date}>{formattedDate}</h1>
                 <div className={styles.aa_create_button_div}>
                     <h1> </h1>
                     <button className={styles.aa_create_button} onClick={handleCreateClick}>Crear</button>
                 </div>
+
+
+                
+
+
+
                 <div className={styles.aa_activities_container}>
+
+
+                {activitiesOn.length === 0 ? (
+                    <div className={styles.aa_no_activities_message}>
+                        <h3>
+                            No hay actividades para este día.
+                        </h3>
+                    </div>
+                    
+                ) : (
                     <ul className={styles.aa_activities_list}>
                         {activitiesOn
                         .slice()
                         .sort((a,b) => a.time.localeCompare(b.time))
                         .map(activity => (
-
                             <div key={activity._id} className={styles.aa_activity_item_white_row}>
                                 <li key={activity._id} className={styles.aa_activity_item}>
                                     {/* Columna 1: Hora */}
-                                    <span className={styles.aa_activity_time}>{activity.time}</span>
-
-                                    <span className={styles.aa_activity_separation}>|</span>
+                                    <p className={styles.aa_activity_time}>{activity.time}</p>
+                                    {/*<p className={styles.aa_activity_separation}>|</p>*/}
                                     
                                     {/* Columna 2: Descripción (con texto ajustable) */}
-                                    <span className={styles.aa_activity_description}>{activity.description}</span>
+                                    <p className={styles.aa_activity_description}>{activity.description}</p>
                                     
                                     {/* Columna 3: Botones de acción */}
                                     <div className={styles.aa_activity_actions}>
@@ -167,20 +171,20 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
                                             className={styles.aa_edit_button}
                                             onClick={() => handleEditClick(activity._id)}  // Función para editar
                                         >
-                                            <Pencil size={16}/>
+                                            <Pencil size={18}/>
                                         </button>
                                         <button
                                             className={styles.aa_delete_button}
                                             onClick={() => handleDelete(activity._id)} // Función para eliminar
                                         >
-                                            <Trash2 size={16}/>
+                                            <Trash2 size={18}/>
                                         </button>
                                     </div>
                                 </li>
 
                                 {activityToDelete === activity._id && showConfirmModal &&(
                                     <li className={styles.aa_activity_confirm_delete_div}>
-                                        <span className={styles.aa_activity_confirm_delete_text}>¿Eliminar actividad?</span>
+                                        <p className={styles.aa_activity_confirm_delete_text}>¿Eliminar actividad?</p>
                                         <div className={styles.aa_confirm_delete_actions}>
                                             <button className={styles.aa_cancel_delete_button} onClick={() => {setShowConfirmModal(false); setActivityToDelete(null)}}>Cancelar</button>
                                             <button className={styles.aa_confirm_delete_button} onClick={confirmDelete}>Eliminar</button>
@@ -191,9 +195,10 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
 
                         ))}
                     </ul>
+                    )}
                 </div>
             </div>
-            {toast && <Toast {...toast} />}
+            {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
             {renderComponentCreate()}
             {renderComponentEdit()}
         </div>
