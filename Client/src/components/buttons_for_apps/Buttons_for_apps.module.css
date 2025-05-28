@@ -15,6 +15,11 @@
     justify-content: center;
     align-items: center;
     border: 1px solid rgba(255, 255, 255, 0);
+    transition: transform 0.2s ease;
+  }
+
+  .bfa_button:hover {
+  transform: scale(1.025); /* 5% más grande */
   }
 
   

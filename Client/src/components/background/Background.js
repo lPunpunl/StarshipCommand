@@ -29,13 +29,13 @@ export const Background = ({ children }) => {
     img.style.transform = `translate(${-currentX}px, ${-currentY}px)`;
 
     if (smallStarsRef.current) {
-      smallStarsRef.current.style.transform = `translate(${-currentX * 0.9}px, ${-currentY * 0.9}px)`;
+      smallStarsRef.current.style.transform = `translate(${-currentX * 2.3}px, ${-currentY * 2.3}px)`;
     }
     if (mediumStarsRef.current) {
-      mediumStarsRef.current.style.transform = `translate(${-currentX * 1.3}px, ${-currentY * 1.3}px)`;
+      mediumStarsRef.current.style.transform = `translate(${-currentX * 3}px, ${-currentY * 3}px)`;
     }
     if (largeStarsRef.current) {
-      largeStarsRef.current.style.transform = `translate(${-currentX * 1.8}px, ${-currentY * 1.8}px)`;
+      largeStarsRef.current.style.transform = `translate(${-currentX * 3.7}px, ${-currentY * 3.7}px)`;
     }
     
     // Volver a llamar al siguiente frame
@@ -114,10 +114,10 @@ export const Background = ({ children }) => {
               {generateStars(70, 0.5, 1)}
         </div>
         <div className={styles.bg_container_stars} ref={mediumStarsRef}>
-              {generateStars(50, 1.5, 2)}
+              {generateStars(50, 0.8, 1)}
         </div>
         <div className={styles.bg_container_stars} ref={largeStarsRef}>
-              {generateStars(40, 2.5, 3)}
+              {generateStars(40, 1.3, 1.3)}
               
         </div>
         {children}

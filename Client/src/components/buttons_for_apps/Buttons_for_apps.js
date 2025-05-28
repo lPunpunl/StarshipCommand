@@ -5,9 +5,9 @@ import { Buscaminas } from '../apps/Buscaminas/Buscaminas';
 
 const BUTTONS = [
   { id: 1, label: 'Agenda', srcSet: '/nebulosa_221726.png', component: Agenda },
-  { id: 2, label: 'Diario', srcSet: '/nebulosa_221726.png', component: Agenda },
-  { id: 3, label: 'Créditos', srcSet: '/nebulosa_221726.png', component: Agenda },
-  { id: 4, label: 'Buscaminas', srcSet: '/nebulosa_221726.png', component: Agenda },
+  { id: 2, label: 'Diario', srcSet: '/nebulosa_A01A20.png', component: Agenda },
+  { id: 3, label: 'Proximamente', srcSet: '/nebulosa_A01A20_v3.png', component: Agenda },
+  { id: 4, label: 'Sobre esta página', srcSet: '/nebulosa_A01A20_v4.png', component: Agenda },
   // Agrega más botones aquí en el futuro
 ];
 
