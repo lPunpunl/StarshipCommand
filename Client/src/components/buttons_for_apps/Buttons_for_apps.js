@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from './Buttons_for_apps.module.css';
 import { Agenda } from '../apps/Agenda/Agenda';
 import { Buscaminas } from '../apps/Buscaminas/Buscaminas';
 
 const BUTTONS = [
-  { id: 1, label: 'Agenda', srcSet: '/boton-agenda', component: Agenda },
-  { id: 2, label: 'Diario', srcSet: '/boton-diario', component: Agenda },
-  { id: 3, label: 'Créditos', srcSet: '/boton-creditos', component: Agenda },
-  { id: 4, label: 'Buscaminas', srcSet: '/boton-buscaminas', component: Agenda },
+  { id: 1, label: 'Agenda', srcSet: '/nebulosa_221726.png', component: Agenda },
+  { id: 2, label: 'Diario', srcSet: '/nebulosa_221726.png', component: Agenda },
+  { id: 3, label: 'Créditos', srcSet: '/nebulosa_221726.png', component: Agenda },
+  { id: 4, label: 'Buscaminas', srcSet: '/nebulosa_221726.png', component: Agenda },
   // Agrega más botones aquí en el futuro
 ];
 
@@ -19,15 +19,26 @@ const forbiddenZone = {
   };
 
 export const Buttons_for_apps = ({ children }) => {
+  const buttonContainerRef = useRef()
   const [activeComponent, setActiveComponent] = useState(null);
   const [positions, setPositions] = useState([]);
-  
+  const buttonSize = window.innerWidth < 600
+  ? { width: 50, height: 15 }
+  : { width: 20, height: 20 };
+  //const [buttonSize, setButtonSize] = useState(initialSize);
 
-  const buttonSize = { width: 30, height: 25 }; // en vw y vh
+  /*useEffect(() => {
+  const isMobile = window.innerWidth < 600;
+  const size = isMobile
+    ? { width: 50, height: 10 }
+    : { width: 30, height: 30 };
+
+  setButtonSize(size);
+}, []);*/
 
   const generatePositions = () => {
     const generated = [forbiddenZone];
-    const attempts = 1000;
+    const attempts = 2000;
 
     const isOverlapping = (a, b) => {
       return !(
@@ -76,38 +87,82 @@ export const Buttons_for_apps = ({ children }) => {
   };
 
   useEffect(() => {
+    if (!buttonSize) return;
     generatePositions();
     window.addEventListener("resize", generatePositions);
     return () => window.removeEventListener("resize", generatePositions);
   }, []);
 
+  
+useEffect(() => {
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+  let animationFrameId;
+  const easing = 0.1;
+
+  const moveButtons = () => {
+    currentX += (targetX - currentX) * easing;
+    currentY += (targetY - currentY) * easing;
+
+    if (buttonContainerRef.current) {
+      buttonContainerRef.current.style.transform = `translate(${-currentX}px, ${-currentY}px)`;
+    }
+
+    animationFrameId = requestAnimationFrame(moveButtons);
+  };
+
+  const handleMouseMove = (e) => {
+    targetX = (e.clientX / window.innerWidth - 0.6) * 20;
+    targetY = (e.clientY / window.innerHeight - 0.6) * 20;
+  };
+
+  const handleTouchMove = (e) => {
+    e.preventDefault();
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      targetX = (touch.clientX / window.innerWidth - 0.6) * 20;
+      targetY = (touch.clientY / window.innerHeight - 0.6) * 20;
+    }
+  };
+
+  moveButtons();
+
+  window.addEventListener('mousemove', handleMouseMove);
+  window.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+  return () => {
+    cancelAnimationFrame(animationFrameId);
+    window.removeEventListener('mousemove', handleMouseMove);
+    window.removeEventListener('touchmove', handleTouchMove);
+  };
+}, []);
+
   return (
     <div className={styles.bfa_container}>
-      {BUTTONS.map((btn, i) => (
-        <button
-          key={btn.id}
-          className={styles.bfa_button}
-          onClick={() => handleButtonClick(btn.id)}
-          disabled={activeComponent !== null}
-          style={{
-            top: `${positions[i]?.top}vh`,
-            left: `${positions[i]?.left}vw`,
-            width: `${buttonSize.width}vw`,
-            height: `${buttonSize.height}vh`,
-          }}
-        >
-          {/**<picture>
-            <source media="(min-width: 1200px)" srcSet={`${btn.srcSet}-1x.png`} />
-            <source media="(min-width: 600px)" srcSet={`${btn.srcSet}-0.5x.png`} />
-            <img
-              src={`${btn.srcSet}-2x.png`}
-              alt={btn.label}
-              className={styles.bfa_button_img}
-            />
-          </picture> */}
-          <span className={styles.bfa_button_text}>{btn.label}</span>
-        </button>
-      ))}
+      <div ref={buttonContainerRef}>
+        {BUTTONS.map((btn, i) => (
+          <button
+            key={btn.id}
+            className={styles.bfa_button}
+            onClick={() => handleButtonClick(btn.id)}
+            disabled={activeComponent !== null}
+            style={{
+              top: `${positions[i]?.top}vh`,
+              left: `${positions[i]?.left}vw`,
+              width: `${buttonSize.width}vw`,
+              height: `${buttonSize.height}vh`
+            }}
+          >
+            <span className={styles.bfa_button_text}>{btn.label}</span>
+            <picture>
+              <img src={btn.srcSet} className={styles.bfa_nebula_image}/>
+            </picture>
+          </button>
+        ))}
+        
+      </div>
       {children}
       {renderComponent()}
     </div>

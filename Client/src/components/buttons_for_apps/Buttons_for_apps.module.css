@@ -8,15 +8,15 @@
   
   .bfa_button {
     position: absolute;
-    border: none;
     background: transparent;
     padding: 0;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.3)
+    border: 1px solid rgba(255, 255, 255, 0);
   }
+
   
   .bfa_button_img {
     width: 100%;
@@ -29,4 +29,13 @@
     position: absolute;
     color: white;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+  }
+
+  .bfa_nebula_image {
+    width: 100%;
+    position: inherit;
+    object-fit: cover;
+    pointer-events: none;
+    overflow: hidden;
+    display: block;
   }

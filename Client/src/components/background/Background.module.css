@@ -13,14 +13,21 @@
 
     .background_img {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: -30px;
+      left: -30px;
       width: 120vw; /* Más grande que el viewport para permitir movimiento */
       height: 120vh;
       object-fit: cover;
       transition: transform 0.1s ease;
       pointer-events: none;
       overflow: hidden;
+    }
+
+    @media (min-width: 1280px){
+      .background_img {
+        top: -100px;
+        left: -100px;
+      }
     }
         
     .bg_container_stars {

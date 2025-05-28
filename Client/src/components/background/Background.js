@@ -104,9 +104,9 @@ export const Background = ({ children }) => {
       <div className={styles.app}>
         <div className={styles.background_wrapper}>
           <picture ref={backgroundRef}>
+            <source media="(min-width: 1800px)" srcSet="/upscale_nebulabackground_2x.png" />
             <source media="(min-width: 1200px)" srcSet="/upscale_nebulabackground_1x.png" />
-            <source media="(min-width: 600px)" srcSet="/upscale_nebulabackground_0.5x.png" />
-            <img src="/upscale_nebulabackground_2x.png" className={styles.background_img}  />
+            <img src="/upscale_nebulabackground_0.5x.png" className={styles.background_img}  />
           </picture>
         </div>
 
