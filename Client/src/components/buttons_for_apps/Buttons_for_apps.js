@@ -4,10 +4,10 @@ import { Agenda } from '../apps/Agenda/Agenda';
 import { Buscaminas } from '../apps/Buscaminas/Buscaminas';
 
 const BUTTONS = [
-  { id: 1, label: 'Agenda', srcSet: '/nebulosa_221726.png', component: Agenda },
-  { id: 2, label: 'Diario', srcSet: '/nebulosa_A01A20.png', component: Agenda },
-  { id: 3, label: 'Proximamente', srcSet: '/nebulosa_A01A20_v3.png', component: Agenda },
-  { id: 4, label: 'Sobre esta página', srcSet: '/nebulosa_A01A20_v4.png', component: Agenda },
+  { id: 1, label: 'Agenda', srcSetLowQuality: '/nebulosa_221726_400px.webp', srcSetMediumQuality: '/nebulosa_221726_600px.webp', srcSetHighQuality: '/nebulosa_221726_800px.webp', component: Agenda },
+  { id: 2, label: 'Diario', srcSetLowQuality: '/nebulosa_EB5900_400px.webp', srcSetMediumQuality: '/nebulosa_EB5900_600px.webp', srcSetHighQuality: '/nebulosa_EB5900_800px.webp', component: Agenda },
+  { id: 3, label: 'Próximamente', srcSetLowQuality: '/nebulosa_2b5121_v3_400px.webp', srcSetMediumQuality: '/nebulosa_2b5121_v3_600px.webp', srcSetHighQuality: '/nebulosa_2b5121_v3_800px.webp', component: Agenda },
+  { id: 4, label: 'Sobre esta página', srcSetLowQuality: '/nebulosa_A01A20_v4_400px.webp', srcSetMediumQuality: '/nebulosa_A01A20_v4_600px.webp', srcSetHighQuality: '/nebulosa_A01A20_v4_800px.webp', component: Agenda },
   // Agrega más botones aquí en el futuro
 ];
 
@@ -157,7 +157,9 @@ useEffect(() => {
           >
             <span className={styles.bfa_button_text}>{btn.label}</span>
             <picture>
-              <img src={btn.srcSet} className={styles.bfa_nebula_image}/>
+              <source media="(min-width: 1800px)" srcSet={btn.srcSetHighQuality} />
+              <source media="(min-width: 1000px)" srcSet={btn.srcSetMediumQuality} />
+              <img src={btn.srcSetLowQuality} className={styles.bfa_nebula_image}/>
             </picture>
           </button>
         ))}

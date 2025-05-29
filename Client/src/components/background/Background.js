@@ -29,13 +29,13 @@ export const Background = ({ children }) => {
     img.style.transform = `translate(${-currentX}px, ${-currentY}px)`;
 
     if (smallStarsRef.current) {
-      smallStarsRef.current.style.transform = `translate(${-currentX * 2.3}px, ${-currentY * 2.3}px)`;
+      smallStarsRef.current.style.transform = `translate(${-currentX * 1.1}px, ${-currentY * 1.1}px)`;
     }
     if (mediumStarsRef.current) {
-      mediumStarsRef.current.style.transform = `translate(${-currentX * 3}px, ${-currentY * 3}px)`;
+      mediumStarsRef.current.style.transform = `translate(${-currentX * 1.5}px, ${-currentY * 1.5}px)`;
     }
     if (largeStarsRef.current) {
-      largeStarsRef.current.style.transform = `translate(${-currentX * 3.7}px, ${-currentY * 3.7}px)`;
+      largeStarsRef.current.style.transform = `translate(${-currentX * 2}px, ${-currentY * 2}px)`;
     }
     
     // Volver a llamar al siguiente frame
@@ -104,20 +104,20 @@ export const Background = ({ children }) => {
       <div className={styles.app}>
         <div className={styles.background_wrapper}>
           <picture ref={backgroundRef}>
-            <source media="(min-width: 1800px)" srcSet="/upscale_nebulabackground_2x.png" />
-            <source media="(min-width: 1200px)" srcSet="/upscale_nebulabackground_1x.png" />
-            <img src="/upscale_nebulabackground_0.5x.png" className={styles.background_img}  />
+            <source media="(min-width: 1800px)" srcSet="/background_v3_2560px.webp" />
+            <source media="(min-width: 1000px)" srcSet="/background_v3_1920px.webp" />
+            <img src="/background_v3_1357px.webp" className={styles.background_img}/>
           </picture>
         </div>
 
         <div className={styles.bg_container_stars} ref={smallStarsRef}>
-              {generateStars(70, 0.5, 1)}
+              {generateStars(60, 1, 1)}
         </div>
         <div className={styles.bg_container_stars} ref={mediumStarsRef}>
-              {generateStars(50, 0.8, 1)}
+              {generateStars(80, 1.1, 1.3)}
         </div>
         <div className={styles.bg_container_stars} ref={largeStarsRef}>
-              {generateStars(40, 1.3, 1.3)}
+              {generateStars(60, 1.4, 1.5)}
               
         </div>
         {children}
