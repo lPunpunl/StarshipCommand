@@ -1,7 +1,7 @@
 .profile_layout_container {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 105px;
     z-index: 3; /* Para que esté por encima de otros elementos */
   }
   
@@ -17,7 +17,7 @@
     box-shadow: 0 0 0 0 rgb(255, 255, 255);
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
+    position: fixed;
   }
   
   .pl_button:hover {
