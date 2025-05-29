@@ -1,4 +1,4 @@
-import { env } from "../utils/constants";
+import { env } from "../utils/env";
 import axios from "axios";
 
 export const createUser = async (formData) => {

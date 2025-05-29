@@ -1,7 +1,5 @@
-const server_ip = "localhost:3997";
-
 export const env = {
-    base_api: `http://${server_ip}/api/v1`,
+    base_api: process.env.REACT_APP_API_URL,
     api_routes: {
         getActivityByMonth: `agenda/searchmonth`,
         getActivitiesByDay: `agenda/searchday`,
