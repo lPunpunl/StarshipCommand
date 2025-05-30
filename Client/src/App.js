@@ -5,6 +5,7 @@ import './App.css'
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { ProfileLayout } from './components/profile_layout/Profile_layout'
+import { useEffect } from 'react';
 
 function App() {
 
@@ -64,7 +65,7 @@ function App() {
   
     return children;
   };
-
+  
   return(
     <Routes>
       <Route path='/' element={

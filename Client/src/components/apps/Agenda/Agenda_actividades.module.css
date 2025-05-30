@@ -127,10 +127,9 @@
     color: #E6E6E6;
     transition: all 0.2s ease;
   }
+  
 
-  .aa_create_button:hover {
-    background-color: #a87f0580;
-  }
+  
   
   /* Lista de actividades sin estilos por defecto */
   .aa_activities_list {
@@ -194,9 +193,7 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  .aa_edit_button:hover {
-    background-color: #29657B80;
-  }
+  
   
   .aa_delete_button {
     padding: 5px 8px 4px 8px;
@@ -205,9 +202,7 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
   
-  .aa_delete_button:hover {
-    background-color: #A01A2080;
-  }
+  
   
 
 
@@ -254,9 +249,7 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  .aa_cancel_delete_button:hover {
-    background-color: #29657B80;
-  }
+  
   
   .aa_confirm_delete_button {
     padding: 5px 8px 4px 8px;
@@ -265,9 +258,7 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
   
-  .aa_confirm_delete_button:hover {
-    background-color: #A01A2080;
-  }
+  
 
 
 
@@ -307,9 +298,7 @@
   transition: all 0.2s ease;
 }
 
-.aa_close_button:hover {
-  background-color: #A01A2080;
-}
+
 
 .aa_close_button::before,
 .aa_close_button::after {
@@ -328,3 +317,31 @@
   transform: rotate(-45deg);
 }
 
+
+
+@media (hover:hover) {
+  .aa_create_button:hover {
+    background-color: #a87f0580;
+  }
+
+  .aa_edit_button:hover {
+    background-color: #29657B80;
+  }
+
+  .aa_delete_button:hover {
+    background-color: #A01A2080;
+  }
+
+  .aa_cancel_delete_button:hover {
+    background-color: #29657B80;
+  }
+
+  .aa_confirm_delete_button:hover {
+    background-color: #A01A2080;
+  }
+
+  .aa_close_button:hover {
+  background-color: #A01A2080;
+}
+
+}

@@ -78,10 +78,7 @@
     transition: all 0.2s ease;
   }
   
-  .eu_submit_button:hover {
-    background-color: #e6e6e6;
-    color: #424242;
-  }
+  
 
 
 
@@ -154,9 +151,7 @@
     transition: all 0.2s ease;
   }
   
-  .eu_close_button:hover {
-    background-color: #e6e6e6;
-  }
+  
   
   .eu_close_button::before,
   .eu_close_button::after {
@@ -168,10 +163,7 @@
   }
 
 
-  .eu_close_button:hover::before,
-  .eu_close_button:hover::after {
-    background-color: #424242;
-  }
+  
   
   .eu_close_button::before {
     transform: rotate(45deg);
@@ -179,4 +171,19 @@
   
   .eu_close_button::after {
     transform: rotate(-45deg);
+  }
+
+  @media (hover:hover) {
+
+    .eu_submit_button:hover {
+    background-color: #e6e6e6;
+    color: #424242;
+  }
+  .eu_close_button:hover {
+    background-color: #e6e6e6;
+  }
+  .eu_close_button:hover::before,
+  .eu_close_button:hover::after {
+    background-color: #424242;
+  }
   }

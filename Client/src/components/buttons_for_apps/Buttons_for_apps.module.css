@@ -18,9 +18,7 @@
     transition: all 0.2s ease;
   }
 
-  .bfa_button:hover {
-    transform: scale(1.025); /* 5% más grande */
-  }
+  
 
   .bfa_button_img {
     width: 100%;
@@ -34,16 +32,7 @@
     transition: all 0.5s ease;
   }
 
-  @media (min-width: 1080px) {
-    .bfa_button_text {
-      color: #E6E6E600;
-    }
-  }
-
-  .bfa_button:hover .bfa_button_text {
-    transform: scale(1.2); /* 5% más grande */
-    color: #E6E6E6;
-  }
+  
 
   .bfa_button_text::after {
     content: '';
@@ -57,9 +46,7 @@
     transition: width 0.6s ease;
   }
 
-  .bfa_button:hover .bfa_button_text::after {
-    width: 100%;
-  }
+  
 
   .bfa_nebula_image {
     width: 100%;
@@ -68,4 +55,17 @@
     pointer-events: none;
     overflow: hidden;
     display: block;
+  }
+
+  @media (hover:hover) {
+    .bfa_button:hover {
+    transform: scale(1.025); /* 5% más grande */
+  }
+  .bfa_button:hover .bfa_button_text {
+    transform: scale(1.2); /* 5% más grande */
+    color: #E6E6E6;
+  }
+  .bfa_button:hover .bfa_button_text::after {
+    width: 100%;
+  }
   }

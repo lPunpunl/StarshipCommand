@@ -125,9 +125,7 @@
     transition: all 0.2s ease;
   }
   
-  .fa_submit_button:hover {
-    background-color: #a87f0580;
-  }
+  
 
 
 
@@ -156,9 +154,7 @@
     transition: all 0.2s ease;
   }
   
-  .fa_close_button:hover {
-    background-color: #A01A2080;
-  }
+  
   
   .fa_close_button::before,
   .fa_close_button::after {
@@ -178,7 +174,14 @@
   }
   
 
-
+  @media (hover:hover) {
+    .fa_submit_button:hover {
+    background-color: #a87f0580;
+  }
+  .fa_close_button:hover {
+    background-color: #A01A2080;
+  }
+  }
 
 
 

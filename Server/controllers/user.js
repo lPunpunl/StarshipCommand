@@ -11,7 +11,7 @@ async function createUser(req, res) {
     if (!password) res.status(400).send({ error: "RequiredField", message: "La contraseña es requerida." });
 
     // 1. Verificar si el usuario ya existe
-    const existingUser = await User.findOne({ user: user.toLowerCase() }); // Búsqueda case-insensitive
+    const existingUser = await User.findOne({ user }); // Búsqueda case-insensitive
     if (existingUser) {
         return res.status(409).send({ error:"ExistingUsername", message: "Nombre de usuario ya en uso." }); // 409 = Conflict
     }
@@ -21,7 +21,7 @@ async function createUser(req, res) {
     const hashPassword = bcrypt.hashSync(password, salt);
 
     const createUser = new User({
-        user: user.toLowerCase(),
+        user,
         password: hashPassword,
     }); 
 

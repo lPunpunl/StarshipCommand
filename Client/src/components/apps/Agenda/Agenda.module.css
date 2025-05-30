@@ -82,9 +82,7 @@
     transition: all 0.2s ease;
 }
   
-.agenda_changemonth_button:hover {
-    background-color: #a87f0580;
-}
+
   
 .agenda_weekdays {
     display: flex;
@@ -129,9 +127,7 @@
     color: #E6E6E6;
 }
   
-.agenda_calendar_day:hover {
-    background-color: #3b284280;
-}
+
   
 .agenda_has_activities {
     background-color: #3b2842; /* Fondo azul claro */
@@ -154,10 +150,7 @@
     position: relative;
 }
 
-.agenda_current_day:hover {
-    background-color: #a87f0580;
-    position: relative;
-}
+
 
 
 
@@ -188,9 +181,7 @@
     transition: all 0.2s ease;
 }
   
-.agenda_close_button:hover {
-    background-color: #A01A2080;
-}
+
   
 .agenda_close_button::before,
 .agenda_close_button::after {
@@ -209,4 +200,22 @@
     transform: rotate(-45deg);
 }
 
+@media (hover:hover) {
 
+    .agenda_changemonth_button:hover {
+    background-color: #a87f0580;
+}
+    .agenda_calendar_day:hover {
+    background-color: #3b284280;
+}
+
+    .agenda_current_day:hover {
+    background-color: #a87f0580;
+    position: relative;
+}
+
+    .agenda_close_button:hover {
+    background-color: #A01A2080;
+}
+
+}

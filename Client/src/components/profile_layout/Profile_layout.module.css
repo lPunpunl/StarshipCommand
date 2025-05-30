@@ -1,7 +1,7 @@
 .profile_layout_container {
     position: absolute;
     top: 20px;
-    right: 105px;
+    right: 20px;
     z-index: 3; /* Para que esté por encima de otros elementos */
   }
   
@@ -17,13 +17,10 @@
     box-shadow: 0 0 0 0 rgb(255, 255, 255);
     cursor: pointer;
     transition: all 0.3s ease;
-    position: fixed;
+    position: relative;
   }
   
-  .pl_button:hover {
-    background-color: #e6e6e6;
-    color: #424242;
-  }
+  
   
   .pl_dropdown_menu {
     display: grid;
@@ -47,7 +44,16 @@
     transition: all 0.3s ease;
   }
   
+  
+
+  @media (hover:hover) {
+
+    .pl_button:hover {
+    background-color: #e6e6e6;
+    color: #424242;
+  }
   .pl_menu_item:hover {
     background-color: #e6e6e6;
     color: #424242;
+  }
   }

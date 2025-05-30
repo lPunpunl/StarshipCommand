@@ -84,9 +84,7 @@
     border-radius: 4px;
   }
 
-  .login_select_tab:hover {
-    background-color: #e6e6e642;
-  }
+  
   
   .login_selected_tab_active {
     color: #424242; /* Texto negro */
@@ -98,9 +96,7 @@
     transition: all 0.2s ease;
   }
 
-  .login_selected_tab_active:hover {
-    background-color: #c7c6c6;
-  }
+  
 
 
 
@@ -153,7 +149,18 @@
     transition: all 0.2s ease;
   }
   
+  
+
+  @media (hover:hover) {
+
+    .login_select_tab:hover {
+    background-color: #e6e6e642;
+  }
+  .login_selected_tab_active:hover {
+    background-color: #c7c6c6;
+  }
   .login_submit_button:hover {
     background-color: #e6e6e6;
     color: #424242;
+  }
   }
