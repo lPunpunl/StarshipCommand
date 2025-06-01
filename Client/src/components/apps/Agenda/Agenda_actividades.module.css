@@ -109,6 +109,9 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     padding: 0px 10px 0px 10px;
+    -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+    touch-action: pan-y; /* Permitir scroll vertical con el dedo */
+    overscroll-behavior: contain;
   }
 
     .aa_create_button_div {
@@ -157,7 +160,7 @@
   }
 
   .aa_activity_separation {
-    flex: 0 0 7px;         /* Ancho fijo para la hora */
+    flex: 0 0 7px;        
     color: #E6E6E6;
   }
   
