@@ -1,9 +1,16 @@
     .app {
-      /*height: 100vh;*/
+      height: 100vh;
       overflow: hidden;/**/
       position: relative;
-      height: calc(var(--vh, 1vh) * 100);
     }
+
+    @supports (-webkit-touch-callout: none) {
+    .app {
+      /* Ajustes especiales para Safari */
+      overflow-y: auto;/**/
+      overflow-x: hidden;
+    }
+}
 
     .background_wrapper {
       position: absolute;
