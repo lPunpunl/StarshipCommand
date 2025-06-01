@@ -3,6 +3,14 @@
       overflow: hidden;/**/
       position: relative;
     }
+    
+    @supports (-webkit-touch-callout: none) {
+      .app {
+        /* Ajustes especiales para Safari */
+        height: auto;
+        min-height: 100%;
+      }
+    }
 
     .background_wrapper {
       position: absolute;
