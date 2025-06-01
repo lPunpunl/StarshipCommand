@@ -2,6 +2,17 @@ import styles from './Background.module.css'
 import { useEffect, useRef } from "react";
 
 export const Background = ({ children }) => {
+  // En tu JS global (ejecutar en mount o inicio)
+  function setViewportHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+
+  // Ejecutar al cargar y cuando cambia el tamaño
+  window.addEventListener('resize', setViewportHeight);
+  window.addEventListener('orientationchange', setViewportHeight);
+  setViewportHeight();
+
   const backgroundRef = useRef();
   const smallStarsRef = useRef();
   const mediumStarsRef = useRef();
