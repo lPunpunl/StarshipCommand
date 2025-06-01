@@ -89,8 +89,8 @@ export const Buttons_for_apps = ({ children }) => {
   useEffect(() => {
     if (!buttonSize) return;
     generatePositions();
-    window.addEventListener("resize", generatePositions);
-    return () => window.removeEventListener("resize", generatePositions);
+    //window.addEventListener("resize", generatePositions);
+    //return () => window.removeEventListener("resize", generatePositions);
   }, []);
 
   
