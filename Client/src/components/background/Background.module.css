@@ -1,16 +1,15 @@
     .app {
       height: 100vh;
-      overflow: hidden;/**/
+      overflow-y: auto;/**/
+      overflow-x: hidden;
       position: relative;
     }
 
-    @supports (-webkit-touch-callout: none) {
-    .app {
-      /* Ajustes especiales para Safari */
-      overflow-y: auto;/**/
-      overflow-x: hidden;
+    @media (min-width: 1280px) {
+      .app {
+        overflow: hidden;
+      }
     }
-}
 
     .background_wrapper {
       position: absolute;
