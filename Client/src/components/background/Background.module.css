@@ -1,14 +1,7 @@
     .app {
       height: 100vh;
-      overflow-y: auto;/**/
-      overflow-x: hidden;
+      overflow: hidden;/**/
       position: relative;
-    }
-
-    @media (min-width: 1280px) {
-      .app {
-        overflow: hidden;
-      }
     }
 
     .background_wrapper {

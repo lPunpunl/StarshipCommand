@@ -33,6 +33,7 @@
     max-width: 600px; /* Opcional: para limitar su crecimiento en pantallas muy grandes */
     padding: 20px;
   }
+}
 
   .aa_activities_container::-webkit-scrollbar {
     width: 4px;
@@ -52,7 +53,9 @@
     background: #555;
   }
   
-}
+
+
+
 
 @media (max-height: 520px) and (orientation : landscape) {
   .agenda_activities_container {
@@ -105,7 +108,7 @@
     position: relative;
     min-height: 280px;
     max-height: 280px;  /* Altura máxima antes de mostrar scroll */
-    overflow-y: auto;   /* Scroll vertical */
+    overflow-y: scroll;   /* Scroll vertical */
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     padding: 0px 10px 0px 10px;

@@ -64,11 +64,11 @@ export const Background = ({ children }) => {
   moveElements();
 
   window.addEventListener("mousemove", handleMouseMove);
-  window.addEventListener("touchmove", handleTouchMove, { passive: false }); // 'passive: true' ayuda al rendimiento
+  //window.addEventListener("touchmove", handleTouchMove, { passive: false }); // 'passive: true' ayuda al rendimiento
 
   return () => {
     window.removeEventListener("mousemove", handleMouseMove);
-    window.removeEventListener("touchmove", handleTouchMove);
+    //window.removeEventListener("touchmove", handleTouchMove);
     cancelAnimationFrame(animationFrameId)
   };
 }, []);
@@ -103,8 +103,8 @@ export const Background = ({ children }) => {
 
     return(
       <div className={styles.app}>
-        <div className={styles.background_wrapper}>
-          <picture ref={backgroundRef}>
+        <div className={styles.background_wrapper} ref={backgroundRef}>
+          <picture >
             <source media="(min-width: 1800px)" srcSet="/background_v3_2560px.webp" />
             <source media="(min-width: 1000px)" srcSet="/background_v3_1920px.webp" />
             <img src="/background_v3_1357px.webp" className={styles.background_img}/>

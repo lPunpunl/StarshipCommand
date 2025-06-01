@@ -130,12 +130,12 @@ useEffect(() => {
   moveButtons();
 
   window.addEventListener('mousemove', handleMouseMove);
-  window.addEventListener('touchmove', handleTouchMove, { passive: false });
+  //window.addEventListener('touchmove', handleTouchMove, { passive: false });
 
   return () => {
     cancelAnimationFrame(animationFrameId);
     window.removeEventListener('mousemove', handleMouseMove);
-    window.removeEventListener('touchmove', handleTouchMove);
+    //window.removeEventListener('touchmove', handleTouchMove);
   };
 }, []);
 
