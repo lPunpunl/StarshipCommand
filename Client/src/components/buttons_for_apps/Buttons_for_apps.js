@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styles from './Buttons_for_apps.module.css';
 import { Agenda } from '../apps/Agenda/Agenda';
-import { Buscaminas } from '../apps/Buscaminas/Buscaminas';
+import { Diario } from '../apps/Diario/Diario'
+import { GastosDiarios } from '../apps/GastosDiarios/GastosDiarios'
 
 const BUTTONS = [
   { id: 1, label: 'Agenda', srcSetLowQuality: '/nebulosa_221726_400px.webp', srcSetMediumQuality: '/nebulosa_221726_600px.webp', srcSetHighQuality: '/nebulosa_221726_800px.webp', component: Agenda },
-  { id: 2, label: 'Diario', srcSetLowQuality: '/nebulosa_EB5900_400px.webp', srcSetMediumQuality: '/nebulosa_EB5900_600px.webp', srcSetHighQuality: '/nebulosa_EB5900_800px.webp', component: Agenda },
-  { id: 3, label: 'Próximamente', srcSetLowQuality: '/nebulosa_2b5121_v3_400px.webp', srcSetMediumQuality: '/nebulosa_2b5121_v3_600px.webp', srcSetHighQuality: '/nebulosa_2b5121_v3_800px.webp', component: Agenda },
+  { id: 2, label: 'Diario', srcSetLowQuality: '/nebulosa_EB5900_400px.webp', srcSetMediumQuality: '/nebulosa_EB5900_600px.webp', srcSetHighQuality: '/nebulosa_EB5900_800px.webp', component: Diario },
+  { id: 3, label: 'Próximamente', srcSetLowQuality: '/nebulosa_2b5121_v3_400px.webp', srcSetMediumQuality: '/nebulosa_2b5121_v3_600px.webp', srcSetHighQuality: '/nebulosa_2b5121_v3_800px.webp', component: GastosDiarios },
   { id: 4, label: 'Sobre esta página', srcSetLowQuality: '/nebulosa_A01A20_v4_400px.webp', srcSetMediumQuality: '/nebulosa_A01A20_v4_600px.webp', srcSetHighQuality: '/nebulosa_A01A20_v4_800px.webp', component: Agenda },
   // Agrega más botones aquí en el futuro
 ];

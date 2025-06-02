@@ -1,0 +1,60 @@
+.gastos_diarios_container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 4;
+}
+
+.gastos_diarios_app_container{
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+    width: 90%;
+    /*background-color: #963A00;*/
+    padding: 10px 10px 15px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0);
+    box-shadow: 0 0 10px #ffffff00;
+    margin: 0 10px 0 10px;
+    min-height: 400px;
+}
+
+@media (min-width: 600px) {
+    .gastos_diarios_app_container {
+        min-width: 600px; 
+        max-width: 600px; /* Opcional: para limitar su crecimiento en pantallas muy grandes */
+        padding: 20px;
+    }
+}
+
+@media (max-height: 520px) and (orientation : landscape) {
+    .gastos_diarios_container {
+        align-items: flex-start;
+        height: 100vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* para suavizar en iOS */
+    }
+    .gastos_diarios_app_container {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+.gastos_diarios_in_development_message {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%; /* O el alto que tenga el contenedor padre */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #E6E6E680; /* O el color que uses para textos */
+}

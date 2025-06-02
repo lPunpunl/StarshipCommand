@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './Toast.module.css'
 import { Info, TriangleAlert, CircleX, CircleCheck  } from 'lucide-react'
 
-export default function Toast({ message, type = 'info', position = 'topRight', onClose }) {
+export default function Toast({ message, type = 'info', position = 'top', onClose }) {
     const [isExiting, setIsExiting] = useState(false)
 
     const renderIcon = () => {
