@@ -1,15 +1,7 @@
     .app {
-      height: 100dvh;
+      height: 100vh;
       overflow: hidden;/**/
       position: relative;
-      padding-bottom: env(safe-area-inset-bottom);
-    }
-
-    @media (min-width: 600px) {
-      .app {
-        height: 100vh;
-      }
-      
     }
 
     .background_wrapper {
