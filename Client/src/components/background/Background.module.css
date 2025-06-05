@@ -1,5 +1,6 @@
     .app {
-      height: 100vh;
+      height: -webkit-fill-available;
+      height: 100dvh;
       overflow: hidden;/**/
       position: relative;
     }
@@ -16,7 +17,7 @@
       top: 0px;
       left: 0px;
       width: 100vw; 
-      height: 100vh;
+      height: 100dvh;
       object-fit: cover;
       transition: transform 0.1s ease;
       pointer-events: none;
