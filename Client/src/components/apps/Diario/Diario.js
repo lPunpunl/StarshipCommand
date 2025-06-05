@@ -15,7 +15,7 @@ export const Diario = ({ onClose }) =>{
         const timer = setTimeout(() => {
             setIsVisible(false);
             setTimeout(() => {
-                onClose(); // Aquí haces lo que hacías en tu `onClose` original
+                onClose();
             }, 200);
         }, 3000)
     
@@ -41,7 +41,7 @@ export const Diario = ({ onClose }) =>{
                 >
                     <div className={styles.diario_app_container}>
                         <div className={styles.diario_in_development_message}>
-                            <h3>Aplicación en desarrollo</h3>
+                            <h3>Aplicación de diario en desarrollo</h3>
                         </div>
                     </div>
                 

@@ -142,7 +142,7 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
                     transition={{ duration: 0.2 }}
                     className={styles.agenda_activities_container}
                 >
-            <div className={styles.agenda_activities_app_container}>
+            <div className={`${styles.agenda_activities_app_container} ${isInvisible ? styles.agenda_activities_app_container_hidden : '' }`}>
                 <div className={styles.aa_close_button_div}>
                     <h2> </h2>
                     <button className={styles.aa_close_button} onClick={handleClose}></button>

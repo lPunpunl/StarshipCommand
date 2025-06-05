@@ -5,7 +5,7 @@ import './App.css'
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { ProfileLayout } from './components/profile_layout/Profile_layout'
-import { useEffect } from 'react';
+import { AboutThePage } from './components/AboutThePage/AboutThePage'
 
 function App() {
 
@@ -74,6 +74,7 @@ function App() {
         </ProtectedRoute>
       }/>
       <Route path='/login' element={loadLayout(Background, Login)}/>
+      <Route path='/aboutthepage' element={<AboutThePage />}/>
     </Routes>
   );
 }

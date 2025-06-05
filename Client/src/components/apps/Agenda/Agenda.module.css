@@ -24,11 +24,11 @@
     box-shadow: 0 0 10px #ffffff00;
     margin: 0 10px 0 10px;
 }
-/*
-.agenda_app_container_hidden {
+
+.agenda_app_container_hiddenMANTENIMIENTO {
     opacity: 0;
     pointer-events: none;
-}*/
+}
 
 @media (min-width: 600px) {
     .agenda_app_container {

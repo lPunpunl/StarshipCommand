@@ -3,12 +3,14 @@ import styles from './Buttons_for_apps.module.css';
 import { Agenda } from '../apps/Agenda/Agenda';
 import { Diario } from '../apps/Diario/Diario'
 import { GastosDiarios } from '../apps/GastosDiarios/GastosDiarios'
+import { AboutThePage } from '../AboutThePage/AboutThePage'
+import { useNavigate } from 'react-router-dom';
 
 const BUTTONS = [
   { id: 1, label: 'Agenda', srcSetLowQuality: '/nebulosa_221726_400px.webp', srcSetMediumQuality: '/nebulosa_221726_600px.webp', srcSetHighQuality: '/nebulosa_221726_800px.webp', component: Agenda },
   { id: 2, label: 'Diario', srcSetLowQuality: '/nebulosa_EB5900_400px.webp', srcSetMediumQuality: '/nebulosa_EB5900_600px.webp', srcSetHighQuality: '/nebulosa_EB5900_800px.webp', component: Diario },
   { id: 3, label: 'Próximamente', srcSetLowQuality: '/nebulosa_2b5121_v3_400px.webp', srcSetMediumQuality: '/nebulosa_2b5121_v3_600px.webp', srcSetHighQuality: '/nebulosa_2b5121_v3_800px.webp', component: GastosDiarios },
-  { id: 4, label: 'Sobre esta página', srcSetLowQuality: '/nebulosa_A01A20_v4_400px.webp', srcSetMediumQuality: '/nebulosa_A01A20_v4_600px.webp', srcSetHighQuality: '/nebulosa_A01A20_v4_800px.webp', component: Agenda },
+  { id: 4, label: 'Sobre esta página', srcSetLowQuality: '/nebulosa_A01A20_v4_400px.webp', srcSetMediumQuality: '/nebulosa_A01A20_v4_600px.webp', srcSetHighQuality: '/nebulosa_A01A20_v4_800px.webp', component: AboutThePage, componentString: 'AboutThePage' },
   // Agrega más botones aquí en el futuro
 ];
 
@@ -20,6 +22,7 @@ const forbiddenZone = {
   };
 
 export const Buttons_for_apps = ({ children }) => {
+  const navigate = useNavigate();
   const buttonContainerRef = useRef()
   const [activeComponent, setActiveComponent] = useState(null);
   const [positions, setPositions] = useState([]);
@@ -70,8 +73,11 @@ export const Buttons_for_apps = ({ children }) => {
     setPositions(generated.slice(1));
   };
 
-  const handleButtonClick = (id) => {
-    setActiveComponent(id);
+  const handleButtonClick = (btn) => {
+    if (btn.componentString === 'AboutThePage') {
+      navigate('/aboutthepage', { replace: true })
+    }
+    setActiveComponent(btn.id);
   };
 
   const handleClose = () => {
@@ -147,7 +153,7 @@ useEffect(() => {
           <button
             key={btn.id}
             className={styles.bfa_button}
-            onClick={() => handleButtonClick(btn.id)}
+            onClick={() => handleButtonClick(btn)}
             disabled={activeComponent !== null}
             style={{
               top: `${positions[i]?.top}vh`,

@@ -182,7 +182,7 @@ export const Agenda = ({ onClose }) =>{
                 transition={{ duration: 0.2 }}
                 className={styles.agenda_container}
               >
-                <div className={styles.agenda_app_container}>
+                <div className={`${styles.agenda_app_container} ${isInvisible ? styles.agenda_app_container_hidden : '' }`}>
                   <div className={styles.agenda_close_button_div}>
                     <h2> </h2>
                     <button className={styles.agenda_close_button} onClick={handleClose}></button>

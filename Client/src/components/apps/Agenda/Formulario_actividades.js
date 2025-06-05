@@ -40,8 +40,8 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
     const handleSubmit = async (e) => {
         e.preventDefault();
             // Validar longitud
-        if (description.length > 250) {
-            showToast("La descripción no puede tener más de 250 caracteres.", "warning", "top");
+        if (description.length > 950) {
+            showToast("La descripción no puede tener más de 950 caracteres.", "warning", "top");
             return;
         }
 
@@ -51,7 +51,7 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
         }
 
         // Validar caracteres permitidos
-        const validDescriptionRegex = /^[a-zA-Z0-9\s.,;:!?¿¡()ñáéíóú'"-]+$/;
+        const validDescriptionRegex = /^[a-zA-Z0-9\s.,;:!?¿¡()ñáéíóú*+-/{}'"-]+$/;
         if (!validDescriptionRegex.test(description)) {
             showToast("La descripción contiene caracteres no permitidos.", "warning", "top");
             return;
