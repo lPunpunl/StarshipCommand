@@ -1,6 +1,6 @@
 .abt_container {
-    /*height: -webkit-fill-available;*/
-    height: 100vh;
+    height: -webkit-fill-available;
+    height: 100dvh;
     width: 100vw;
     overflow-y: auto;
 }
