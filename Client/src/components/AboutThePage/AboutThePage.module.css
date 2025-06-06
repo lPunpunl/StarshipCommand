@@ -71,7 +71,7 @@
     align-items: center;
     padding-top: 150px;
     max-width: 350px;
-    margin-bottom: 70px;
+    margin-bottom: 40px;
 }
 
 @media (min-width: 394px) {
@@ -157,8 +157,9 @@
 }
 
 .abt_gallery_text {
+    padding: 5px 0 0 0;
     font-style: italic;
-    opacity: 70%;
+    opacity: 60%;
     margin-top: 10px;
     text-indent: 2em;
 }

@@ -81,8 +81,8 @@ export const AboutThePage = () => {
           <div className={styles.abt_content}>
             <h1>Galería</h1>
             <p>A continuación una muestra de las imagenes creadas con la herramienta Krita.</p>
-            <p>Haz click en la imagen para hacer zoom y desplazarte.</p>
             <div className={styles.abt_gallery_image_container}>
+              <p style={{opacity: '60%'}}>Haz doble click en la imagen para hacer zoom y desplazarte.</p>
               <ReactMagnifierImage src='/galeria_nebulosa_221726.png'/>
               <p className={styles.abt_gallery_text}>Nebulosa 221726</p>
             </div>
@@ -138,7 +138,7 @@ export const AboutThePage = () => {
         </div>
         <div className={styles.abt_header_buttons}>
           <div className={styles.abt_goback_container}>
-            <button onClick={handleGoBackClick} className={`${styles.abt_goback_button} ${darkMode ? styles.abt_goback_button_darkmode : ''}`}> <MoveLeft size={'20px'}/> Regresar</button>
+            <button onClick={handleGoBackClick} className={`${styles.abt_goback_button} ${darkMode ? styles.abt_goback_button_darkmode : ''}`}> <MoveLeft size={'20px'} style={{ marginRight: '0.5em' }}/> {" "}Regresar</button>
           </div>
           <div className={styles.abt_content_buttons_container}>
             <button onClick={() => setSection('aboutme')} className={`${styles.abt_content_buttons} ${darkMode ? styles.abt_content_buttons_darkmode : ''} ${section === 'aboutme' ? styles.abt_content_button_focus : ''}`}>Sobre mí</button>

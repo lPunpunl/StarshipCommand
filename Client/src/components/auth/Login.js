@@ -143,6 +143,9 @@ export const Login = () => {
         </button>
       </form>
     </div>
+    <div>
+      <button className={styles.login_redirect_aboutthepage} onClick={() => navigate('/aboutthepage', { replace: true })}>Sobre esta página</button>
+    </div>
     {toast && <Toast {...toast} onClose={() => setToast(null)}/>}
   </div>
   );
