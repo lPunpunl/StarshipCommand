@@ -54,7 +54,7 @@
     font-weight: 200;
   }
 
-  p {
+  p, li {
     font-size: var(--font-size-sm);
     font-weight: 200;
   }

@@ -22,6 +22,10 @@ app.use(`/api/${process.env.API_VERSION}`, agendaRoutes)
 app.use(`/api/${process.env.API_VERSION}`, userRoutes)
 app.use(`/api/${process.env.API_VERSION}`, authRoutes)
 
+app.get("/ping", (req, res) => {
+    res.status(200).send("pong");
+});
+
 
 module.exports = app;
 
