@@ -156,10 +156,10 @@ useEffect(() => {
             onClick={() => handleButtonClick(btn)}
             disabled={activeComponent !== null}
             style={{
-              top: `${positions[i]?.top}vh`,
+              top: `${positions[i]?.top}dvh`,
               left: `${positions[i]?.left}vw`,
               width: `${buttonSize.width}vw`,
-              height: `${buttonSize.height}vh`
+              height: `${buttonSize.height}dvh`
             }}
           >
             <span className={styles.bfa_button_text}>{btn.label}</span>
