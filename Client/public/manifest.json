@@ -8,14 +8,14 @@
       "type": "image/x-icon"
     },
     {
-      "src": "nebulosa_A01A20_v4_400px.png",
+      "src": "change_logo_512.png",
       "type": "image/png",
-      "sizes": "400x358"
+      "sizes": "512x512"
     },
     {
-      "src": "nebulosa_A01A20_v4_400px.png",
+      "src": "change_logo_192.png",
       "type": "image/png",
-      "sizes": "400x358"
+      "sizes": "192x192"
     }
   ],
   "start_url": ".",
