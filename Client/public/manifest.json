@@ -1,25 +1,25 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Change",
+  "name": "Change",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "nebulosa_a01a20_v4_T9v_icon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "nebulosa_A01A20_v4_400px.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "400x358"
     },
     {
-      "src": "logo512.png",
+      "src": "nebulosa_A01A20_v4_400px.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "400x358"
     }
   ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#07090D"
 }

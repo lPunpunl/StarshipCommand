@@ -33,7 +33,7 @@
 @media (min-width: 600px) {
     .agenda_app_container {
         min-width: 600px; 
-        max-width: 600px; /* Opcional: para limitar su crecimiento en pantallas muy grandes */
+        max-width: 600px;
         padding: 20px;
     }
 }
@@ -43,7 +43,7 @@
         align-items: flex-start;
         height: 100vh;
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch; /* para suavizar en iOS */
+        -webkit-overflow-scrolling: touch;
     }
     .agenda_app_container {
         margin-top: 10px;
@@ -130,7 +130,7 @@
 
   
 .agenda_has_activities {
-    background-color: #3b2842; /* Fondo azul claro */
+    background-color: #3b2842;
     position: relative;
 }
 
@@ -142,7 +142,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: #D9A300; /* Punto amarillo */
+    background-color: #D9A300;
 }
 
 .agenda_current_day {

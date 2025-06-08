@@ -15,7 +15,7 @@ export const GastosDiarios = ({ onClose }) =>{
         const timer = setTimeout(() => {
             setIsVisible(false);
             setTimeout(() => {
-                onClose(); // Aquí haces lo que hacías en tu `onClose` original
+                onClose();
             }, 200);
         }, 3000)
     

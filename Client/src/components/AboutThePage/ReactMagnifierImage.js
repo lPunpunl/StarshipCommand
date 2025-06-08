@@ -6,10 +6,10 @@ export const ReactMagnifierImage = ({ src, alt = '', width = '100%', height = 'a
       <Magnifier
         imageSrc={src}
         imageAlt={alt}
-        largeImageSrc={src} // puede ser una imagen de mayor resolución si tienes una
+        largeImageSrc={src} 
         dragToMove={true}
-        mouseActivation="doubleClick" // clic para activar
-        touchActivation="doubleTap"   // tap para activar en móvil
+        mouseActivation="doubleClick" 
+        touchActivation="doubleTap"   
         interactionSettings={{
           tapDuration: 250,
           longTapDuration: 500,

@@ -19,7 +19,6 @@
 }
 
 
-/* Barra animada simulando el border-bottom */
 .message::after {
     content: '';
     position: absolute;
@@ -31,7 +30,6 @@
     animation: shrinkLine 3s linear forwards;
 }
 
-/* Animación que reduce el ancho de 100% a 0% */
 @keyframes shrinkLine {
     from {
         width: 100%;

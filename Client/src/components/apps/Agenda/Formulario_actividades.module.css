@@ -28,7 +28,7 @@
 @media (min-width: 600px) {
   .formulario_actividades_app_container {
     min-width: 600px; 
-    max-width: 600px; /* Opcional: para limitar su crecimiento en pantallas muy grandes */
+    max-width: 600px; 
     min-height: 421px;
     padding: 20px;
   }
@@ -39,7 +39,7 @@
       align-items: flex-start;
       height: 100vh;
       overflow-y: auto;
-      -webkit-overflow-scrolling: touch; /* para suavizar en iOS */
+      -webkit-overflow-scrolling: touch; 
   }
   .formulario_actividades_app_container {
       margin-top: 10px;

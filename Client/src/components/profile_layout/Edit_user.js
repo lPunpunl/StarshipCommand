@@ -14,7 +14,6 @@ export const EditUser = ({ onClose }) => {
     const [isToastVisible, setIsToastVisible] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
 
-    //useState y funcion para llamar y mostrar una notificacion toast
     const [toast, setToast] = useState(null);
     const showToast = (message, type, position) =>{
         setToast({message, type, position});
@@ -54,7 +53,6 @@ const validationSchema = Yup.object({
         },
         validationSchema,
         onSubmit: async (values, { setSubmitting }) => {
-        // arma el payload igual que antes
         const payload = {
             user: storedUser,
             password: values.password,
@@ -63,10 +61,9 @@ const validationSchema = Yup.object({
         };
         try {
             const response = await editUser(payload, token);
-            setSubmitting(true); // Deshabilita el botón
-            // Lógica de post-submit
+            setSubmitting(true);
+            
             if (values.newPassword) {
-                // si cambió password, desloguear
                 localStorage.removeItem('jwtToken');
                 localStorage.removeItem('user');
                 localStorage.removeItem('_id');
@@ -91,8 +88,8 @@ const validationSchema = Yup.object({
     const handleClose = () => {
         setIsVisible(false);
         setTimeout(() => {
-        onClose(); // Aquí haces lo que hacías en tu `onClose` original
-      }, 200); // Tiempo suficiente para que el exit se vea (igual a transition.duration)
+            onClose();
+        }, 200);
     }
 
     return (

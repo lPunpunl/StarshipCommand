@@ -11,7 +11,6 @@ const BUTTONS = [
   { id: 2, label: 'Diario', srcSetLowQuality: '/nebulosa_EB5900_400px.webp', srcSetMediumQuality: '/nebulosa_EB5900_600px.webp', srcSetHighQuality: '/nebulosa_EB5900_800px.webp', component: Diario },
   { id: 3, label: 'Próximamente', srcSetLowQuality: '/nebulosa_2b5121_v3_400px.webp', srcSetMediumQuality: '/nebulosa_2b5121_v3_600px.webp', srcSetHighQuality: '/nebulosa_2b5121_v3_800px.webp', component: GastosDiarios },
   { id: 4, label: 'Sobre esta página', srcSetLowQuality: '/nebulosa_A01A20_v4_400px.webp', srcSetMediumQuality: '/nebulosa_A01A20_v4_600px.webp', srcSetHighQuality: '/nebulosa_A01A20_v4_800px.webp', component: AboutThePage, componentString: 'AboutThePage' },
-  // Agrega más botones aquí en el futuro
 ];
 
 const forbiddenZone = {

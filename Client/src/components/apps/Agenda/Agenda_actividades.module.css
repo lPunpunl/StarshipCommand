@@ -30,7 +30,7 @@
 @media (min-width: 600px) {
   .agenda_activities_app_container {
     min-width: 600px; 
-    max-width: 600px; /* Opcional: para limitar su crecimiento en pantallas muy grandes */
+    max-width: 600px; 
     padding: 20px;
   }
 }
@@ -44,7 +44,7 @@
   }
   
   .aa_activities_container::-webkit-scrollbar-thumb {
-    background-color: #888; /* color del scroll */
+    background-color: #888; 
     border-radius: 80px;
     border: 2px solid transparent;
   }
@@ -62,7 +62,7 @@
       align-items: flex-start;
       height: 100vh;
       overflow-y: auto;
-      -webkit-overflow-scrolling: touch; /* para suavizar en iOS */
+      -webkit-overflow-scrolling: touch;
   }
   .agenda_activities_app_container {
       margin-top: 10px;
@@ -92,28 +92,27 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 100%; /* O el alto que tenga el contenedor padre */
+  height: 100%; 
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #E6E6E680; /* O el color que uses para textos */
+  color: #E6E6E680; 
 }
 
 
 
 
-/* Contenedor principal con scroll */
 .aa_activities_container {
     position: relative;
     min-height: 280px;
-    max-height: 280px;  /* Altura máxima antes de mostrar scroll */
-    overflow-y: scroll;   /* Scroll vertical */
+    max-height: 280px;  
+    overflow-y: scroll;   
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     padding: 0px 10px 0px 10px;
-    -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
-    touch-action: pan-y; /* Permitir scroll vertical con el dedo */
+    -webkit-overflow-scrolling: touch; 
+    touch-action: pan-y; 
     overscroll-behavior: contain;
   }
 
@@ -137,17 +136,15 @@
 
   
   
-  /* Lista de actividades sin estilos por defecto */
   .aa_activities_list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  /* Cada item de actividad (flexbox para columnas) */
   .aa_activity_item {
-    display: flex;           /* Distribución horizontal */
-    align-items: center;     /* Centrado vertical */
+    display: flex;           
+    align-items: center;     
     padding: 10px 8px;
   }
 
@@ -155,9 +152,8 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   }
   
-  /* Columnas */
   .aa_activity_time {
-    /*flex: 0 0 42px;         /* Ancho fijo para la hora */
+    /*flex: 0 0 42px;         */
     padding: 0 5px 0 0;
     color: #E6E6E6;
   }
@@ -169,22 +165,21 @@
   
   .aa_activity_description {
     border-left: 1px solid rgba(255, 255, 255, 0.3);
-    flex: 1;                /* Toma el espacio restante */
+    flex: 1;                
     padding: 0 5px;
-    /*white-space: nowrap;*/    /* Evita saltos de línea */
-    overflow: hidden;       /* Oculta texto que sobresale */
-    text-overflow: ellipsis; /* Muestra "..." si el texto es largo */
+    /*white-space: nowrap;*/    
+    overflow: hidden;       
+    text-overflow: ellipsis; 
     color: #E6E6E6;
   }
 
-  .aa_activity_actions {/* Ancho fijo para los botones */
+  .aa_activity_actions {
     display: flex;
-    gap: 10px;               /* Espacio entre botones */
+    gap: 10px;               
     margin-left: 10px;
     border-radius: 6px;
   }
   
-  /* Botones */
   .aa_edit_button, .aa_delete_button {
     border: none;
     border-radius: 4px;
@@ -194,7 +189,7 @@
   
   .aa_edit_button {
     padding: 5px 8px 4px 8px;
-    background-color: #29657B00; /* Verde */
+    background-color: #29657B00; 
     color: #a87f05;
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
@@ -217,8 +212,8 @@
 
 
   .aa_activity_confirm_delete_div {
-    display: flex;           /* Distribución horizontal */
-    align-items: center;     /* Centrado vertical */
+    display: flex;          
+    align-items: center;     
     justify-content: center;
     padding: 10px 20px;
     border-radius: 5px;
@@ -226,17 +221,17 @@
   }
 
     .aa_activity_confirm_delete_text {  
-    /*flex: 1;/* Toma el espacio restante */
+    /*flex: 1; */
     padding: 0 1px;
-    /*white-space: nowrap;*/    /* Evita saltos de línea */
-    overflow: hidden;       /* Oculta texto que sobresale */
-    text-overflow: ellipsis; /* Muestra "..." si el texto es largo */
+    /*white-space: nowrap;*/    
+    overflow: hidden;     
+    text-overflow: ellipsis; 
     color: #E6E6E6;
   }
 
-    .aa_confirm_delete_actions {/* Ancho fijo para los botones */
+    .aa_confirm_delete_actions {
     display: flex;
-    gap: 10px;               /* Espacio entre botones */
+    gap: 10px;               
     margin-left: 10px;
     border-radius: 6px;
   }

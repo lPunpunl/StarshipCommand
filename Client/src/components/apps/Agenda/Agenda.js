@@ -33,7 +33,6 @@ export const Agenda = ({ onClose }) =>{
       return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    //funcion para obtener las actividades del mes
     const fetchActivitiesByMonth = async () => {
       setLoading(true);
       try {
@@ -57,7 +56,6 @@ export const Agenda = ({ onClose }) =>{
     }, [currentDate, updateFetch]);
   
   
-    // Funciones para cambiar de mes
     const goToPreviousMonth = () => {
       setDirection("prev");
       requestAnimationFrame(() => {
@@ -72,7 +70,6 @@ export const Agenda = ({ onClose }) =>{
       });
     };
   
-    // Función para seleccionar un día
     const handleDayClick = (day) => {
         const month = currentDate.getMonth() + 1;
         const year = currentDate.getFullYear();
@@ -81,29 +78,24 @@ export const Agenda = ({ onClose }) =>{
         setIsInvisible(true);
     };
     
-
-    // Función para generar los días del mes
     const renderCalendar = () => {
       const year = currentDate.getFullYear();
       const month = currentDate.getMonth();
       const firstDayOfMonth = new Date(year, month, 1);
       const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const startingDay = firstDayOfMonth.getDay(); // Día de la semana en que comienza el mes
+      const startingDay = firstDayOfMonth.getDay(); 
 
-      const today = new Date(); // Fecha actual
+      const today = new Date();
       const todayDay = today.getDate();
       const todayMonth = today.getMonth();
       const todayYear = today.getFullYear();
   
       const calendarDays = [];
   
-      // Rellenar días vacíos al inicio del mes
       for (let i = 0; i < startingDay; i++) {
         calendarDays.push(<div key={`empty-${i}`} className={styles.agenda_empty_day}></div>);
       }
 
-  
-      // Rellenar los días del mes
       for (let day = 1; day <= daysInMonth; day++) {
         const stringDay = day.toString();
         const stringMonth = (month + 1).toString();
@@ -124,10 +116,9 @@ export const Agenda = ({ onClose }) =>{
         );
       }
 
-      // Rellenar días vacíos al final del mes para completar la última fila
       const totalCells = calendarDays.length;
-      const remainingCells = 7 - (totalCells % 7); // Días vacíos necesarios para completar la última fila
-      if (remainingCells < 7) { // Solo agregar días vacíos si no está completa
+      const remainingCells = 7 - (totalCells % 7);
+      if (remainingCells < 7) {
       for (let i = 0; i < remainingCells; i++) {
         calendarDays.push(<div key={`empty-end-${i}`} className={styles.agenda_empty_day}></div>);
         }
@@ -137,15 +128,15 @@ export const Agenda = ({ onClose }) =>{
     };
 
     const handleComponentClose = () => {
-        setSelectedDate(null); // Oculta el componente
+        setSelectedDate(null); 
         setIsInvisible(false);
     };
 
     const handleClose = () => {
       setIsVisible(false);
       setTimeout(() => {
-        onClose(); // Aquí haces lo que hacías en tu `onClose` original
-      }, 200); // Tiempo suficiente para que el exit se vea (igual a transition.duration)
+        onClose(); 
+      }, 200); 
     }
 
     const renderComponent = () => {

@@ -8,12 +8,11 @@ import * as Yup from 'yup'
 import Toast from '../utils/Toast'
 
 export const Login = () => {
-  const [activeTab, setActiveTab] = useState('login'); // 'login' o 'register'
+  const [activeTab, setActiveTab] = useState('login'); 
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
   const [isToastVisible, setIsToastVisible] = useState(false);
 
-  //useState y funcion para llamar y mostrar una notificacion toast
   const [toast, setToast] = useState(null);
   const showToast = (message, type, position) =>{
         setToast({message, type, position});
@@ -44,7 +43,6 @@ export const Login = () => {
     },
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      // arma el payload igual que antes
       const payload = {
         user: values.user,
         password: values.password

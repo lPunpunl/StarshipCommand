@@ -23,7 +23,7 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
         setToast({message, type, position});
     };
 
-    const date = new Date(selectedDate.year, selectedDate.month - 1, selectedDate.day); // mes va de 0 a 11
+    const date = new Date(selectedDate.year, selectedDate.month - 1, selectedDate.day);
     const formattedDate = date.toLocaleDateString('es-ES', {
     day: 'numeric',
     month: 'long',
@@ -39,14 +39,14 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
         setIsVisible(false);
         setTimeout(() => {
             const now = new Date();
-            const horas = now.getHours().toString().padStart(2, '0');     // 2 dígitos (ej: 09)
-            const minutos = now.getMinutes().toString().padStart(2, '0'); // 2 dígitos (ej: 05)
-            const segundos = now.getSeconds().toString().padStart(2, '0'); // 2 dígitos (ej: 03)
+            const horas = now.getHours().toString().padStart(2, '0');     
+            const minutos = now.getMinutes().toString().padStart(2, '0'); 
+            const segundos = now.getSeconds().toString().padStart(2, '0'); 
             const fullHour = horas + minutos + segundos;
             
             onUpdateFetch(fullHour);
-            if (onClose) onClose(); // Aquí haces lo que hacías en tu `onClose` original
-        }, 200); // Tiempo suficiente para que el exit se vea (igual a transition.duration)
+            if (onClose) onClose(); 
+        }, 200); 
         
     }
 
@@ -168,24 +168,24 @@ export const Agenda_actividades = ({ activities, selectedDate, onClose, onUpdate
                         .map(activity => (
                             <div key={activity._id} className={styles.aa_activity_item_white_row}>
                                 <li key={activity._id} className={styles.aa_activity_item}>
-                                    {/* Columna 1: Hora */}
+                                    
                                     <p className={styles.aa_activity_time}>{activity.time}</p>
                                     {/*<p className={styles.aa_activity_separation}>|</p>*/}
                                     
-                                    {/* Columna 2: Descripción (con texto ajustable) */}
+                                    
                                     <p className={styles.aa_activity_description}>{activity.description}</p>
                                     
-                                    {/* Columna 3: Botones de acción */}
+                                    
                                     <div className={styles.aa_activity_actions}>
                                         <button 
                                             className={styles.aa_edit_button}
-                                            onClick={() => handleEditClick(activity._id)}  // Función para editar
+                                            onClick={() => handleEditClick(activity._id)}  
                                         >
                                             <Pencil size={18}/>
                                         </button>
                                         <button
                                             className={styles.aa_delete_button}
-                                            onClick={() => handleDelete(activity._id)} // Función para eliminar
+                                            onClick={() => handleDelete(activity._id)}
                                         >
                                             <Trash2 size={18}/>
                                         </button>

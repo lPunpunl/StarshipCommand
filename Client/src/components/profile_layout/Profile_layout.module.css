@@ -2,7 +2,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    z-index: 3; /* Para que esté por encima de otros elementos */
+    z-index: 3; 
   }
   
   .pl_button {

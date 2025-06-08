@@ -20,10 +20,9 @@ export const Background = ({ children }) => {
   let currentY = 0;
   let animationFrameId;
 
-  const easing = 0.1; // Velocidad de suavizado (0.05 es lento, 0.1 es más rápido)
+  const easing = 0.1;
 
   const moveElements = () => {
-     // Interpolar entre la posición actual y la deseada
      currentX += (targetX - currentX) * easing;
      currentY += (targetY - currentY) * easing;
 
@@ -39,7 +38,6 @@ export const Background = ({ children }) => {
       largeStarsRef.current.style.transform = `translate(${-currentX * 2}px, ${-currentY * 2}px)`;
     }
     
-    // Volver a llamar al siguiente frame
     animationFrameId = requestAnimationFrame(moveElements);
   };
 

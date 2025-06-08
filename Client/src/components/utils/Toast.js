@@ -22,7 +22,7 @@ export default function Toast({ message, type = 'info', position = 'top', onClos
     useEffect(() => {
     const timer = setTimeout(() => {
         setIsExiting(true)
-        setTimeout(onClose, 500) // espera que termine la animación
+        setTimeout(onClose, 500)
     }, 3000)
 
     return () => clearTimeout(timer)

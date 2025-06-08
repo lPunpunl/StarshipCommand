@@ -27,7 +27,7 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
     year: 'numeric'
     });
 
-    //carga de datos si esta en modo edicion
+  
     useEffect(() => {
         if (mode === "edit" && activityData) {
           const [h, m] = activityData.time.split(':');
@@ -39,7 +39,6 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-            // Validar longitud
         if (description.length > 950) {
             showToast("La descripción no puede tener más de 950 caracteres.", "warning", "top");
             return;
@@ -50,7 +49,6 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
             return;
         }
 
-        // Validar caracteres permitidos
         const validDescriptionRegex = /^[a-zA-Z0-9\s.,;:!?¿¡()ñáéíóú*+-/{}'"-]+$/;
         if (!validDescriptionRegex.test(description)) {
             showToast("La descripción contiene caracteres no permitidos.", "warning", "top");
@@ -71,13 +69,13 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
               showToast(error.message, "error", "top")
             }
         }
-        onClose(); // Cierra el modal después de enviar
+        onClose();
       };
     
       const handleKeyDown = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
-          handleSubmit(e); // aquí sí le mandas el evento
+          handleSubmit(e);
         }
       };
 
@@ -146,8 +144,8 @@ export const Formulario_actividades = ({ onClose, selectedDate, mode="create", a
       const handleClose = () => {
         setIsVisible(false);
         setTimeout(() => {
-          onClose(); // Aquí haces lo que hacías en tu `onClose` original
-        }, 200); // Tiempo suficiente para que el exit se vea (igual a transition.duration)
+          onClose();
+        }, 200); 
       }
     
     return (

@@ -60,10 +60,10 @@
 
   @media (hover:hover) {
     .bfa_button:hover {
-    transform: scale(1.025); /* 5% más grande */
+    transform: scale(1.025); 
   }
   .bfa_button:hover .bfa_button_text {
-    transform: scale(1.2); /* 5% más grande */
+    transform: scale(1.2); 
     color: #E6E6E6;
   }
   .bfa_button:hover .bfa_button_text::after {

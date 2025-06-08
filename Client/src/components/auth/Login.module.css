@@ -31,7 +31,7 @@
     @media (min-width: 600px) {
     .login_form_container {
         min-width: 500px; 
-        max-width: 500px; /* Opcional: para limitar su crecimiento en pantallas muy grandes */
+        max-width: 500px;
         padding: 20px;
     }
 }
@@ -41,7 +41,7 @@
         align-items: flex-start;
         height: 100vh;
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch; /* para suavizar en iOS */
+        -webkit-overflow-scrolling: touch;
     }
     .login_form_container {
         margin-top: 10px;
@@ -88,12 +88,12 @@
   
   
   .login_selected_tab_active {
-    color: #424242; /* Texto negro */
-    text-shadow: 0 0 5px #E6E6E6, 0 0 10px #ffffff; /* Sombra blanca tipo glow */
+    color: #424242;
+    text-shadow: 0 0 5px #E6E6E6, 0 0 10px #ffffff; 
     background-color: #e6e6e6 ;
     border-radius: 4px;
-    /*border-bottom: 2px solid #cac9c9; /* Borde blanco */
-    /*box-shadow: 0px 0px 5px 1px #ffffff; /* Glow en el borde inferior */
+    /*border-bottom: 2px solid #cac9c9;
+    /*box-shadow: 0px 0px 5px 1px #ffffff; */
     transition: all 0.2s ease;
   }
 
